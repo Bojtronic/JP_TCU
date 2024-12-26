@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sicultura</title>
   <link rel="stylesheet" href="styles.css">
+  <title>Sicultura</title>
 </head>
 <body>
   <!-- Encabezado -->
@@ -12,8 +12,8 @@
     <div class="header-container">
       <img src="../images/sicultura_logo.jpg" alt="Logo Sicultura" class="logo">
       <div class="header-buttons">
-        <button>Solicitar cuenta</button>
-        <button>Iniciar sesión</button>
+        <button type="button">Solicitar cuenta</button>
+        <button type="button">Iniciar sesión</button>
       </div>
     </div>
     <nav class="navbar">
@@ -37,34 +37,72 @@
     </p>
   </section>
 
-  <!-- Contenido principal -->
-  <main>
-    <section class="directorio">
-      <h2>Directorio Cultural</h2>
-      <p>
-        El Directorio Cultural es un catálogo virtual con fichas informativas que reseñan los recursos culturales 
-        y artísticos de todo el país.
-      </p>
-      <div class="icon-grid">
-        <div class="icon-item">
-          <img src="../images/sicultura_logo.jpg" alt="Icono 1">
-          <p>Empresas, grupos y organizaciones</p>
-        </div>
-        <div class="icon-item">
-          <img src="../images/sicultura_logo.jpg" alt="Icono 2">
-          <p>Personas</p>
-        </div>
-        <div class="icon-item">
-          <img src="../images/sicultura_logo.jpg" alt="Icono 3">
-          <p>Festividades</p>
-        </div>
-        <div class="icon-item">
-          <img src="../images/sicultura_logo.jpg" alt="Icono 4">
-          <p>Manifestaciones culturales</p>
-        </div>
+  <!-- Directorio Cultural -->
+  <section class="directorio">
+    <h2>Directorio Cultural</h2>
+    <p>
+      El Directorio Cultural es un catálogo virtual con fichas informativas que reseñan los recursos culturales 
+      y artísticos de todo el país.
+    </p>
+    <div class="icon-grid">
+      <div class="icon-item">
+        <img src="../images/sicultura_logo.jpg" alt="Empresas, grupos y organizaciones">
+        <p>Empresas, grupos y organizaciones</p>
       </div>
-    </section>
-  </main>
+      <div class="icon-item">
+        <img src="../images/sicultura_logo.jpg" alt="Personas">
+        <p>Personas</p>
+      </div>
+      <div class="icon-item">
+        <img src="../images/sicultura_logo.jpg" alt="Festividades">
+        <p>Festividades</p>
+      </div>
+      <div class="icon-item">
+        <img src="../images/sicultura_logo.jpg" alt="Manifestaciones culturales">
+        <p>Manifestaciones culturales</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mapa Cultural -->
+  <section class="map-promo">
+    <img src="../images/map_page.PNG" alt="Vista previa del mapa cultural" class="map-preview">
+    <div class="map-description">
+      <h2>Mapa Cultural</h2>
+      <p>
+        El Mapa Cultural es una novedosa herramienta desarrollada para mostrar y promover los recursos culturales de Costa Rica. 
+        Explora los puntos culturales más relevantes del país de una manera interactiva.
+      </p>
+      <a href="map.html" class="map-button">Ir al mapa</a>
+    </div>
+  </section>
+
+  <!-- Agenda -->
+  <section class="agenda-cultural">
+    <h2>Agenda Cultural</h2>
+    <div class="filters">
+      <input type="text" placeholder="Buscar por palabra clave">
+      <select>
+        <option>Seleccionar categoría</option>
+      </select>
+      <select>
+        <option>Provincia</option>
+      </select>
+      <button>Buscar</button>
+    </div>
+  
+    <h3>Próximos eventos</h3>
+    <div class="event-list">
+      <div class="event-item">
+        <p><strong>lunes 8 de enero - 10:00 a.m.</strong></p>
+        <h4>NUEVO EVENTO CULTURAL</h4>
+        <p>Descripción breve del evento cultural, destacando los puntos más importantes...</p>
+        <button>Ver este evento</button>
+      </div>
+     
+    </div>
+  </section>
+  
 
   <!-- Pie de página -->
   <footer>

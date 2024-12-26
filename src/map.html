@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mapa interactivo con filtros para sectores culturales e infraestructura cultural.">
+    <title>Mapa con Filtros</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="map.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Panel de filtros -->
+        <aside class="filters-panel">
+            <div class="tabs">
+                <button class="tab active" data-tab="sectores">Sectores Culturales</button>
+                <button class="tab" data-tab="infraestructura">Infraestructura Cultural</button>
+            </div>
+            <div class="filters-content">
+                <!-- Sectores Culturales -->
+                <div class="filters-tab active" id="sectores">
+                    <fieldset>
+                        <legend>Sectores culturales</legend>
+                        <label><input type="checkbox" value="artesanias"> Artesanías</label>
+                        <label><input type="checkbox" value="musica"> Música</label>
+                        <label><input type="checkbox" value="publicidad"> Publicidad</label>
+                        <label><input type="checkbox" value="artes_escenicas"> Artes Escénicas</label>
+                        <label><input type="checkbox" value="artes_visuales"> Artes Visuales</label>
+                        <label><input type="checkbox" value="patrimonio_inmaterial"> Patrimonio inmaterial</label>
+                        <label><input type="checkbox" value="diseno"> Diseño</label>
+                        <label><input type="checkbox" value="audiovisual"> Audiovisual</label>
+                        <label><input type="checkbox" value="literatura"> Literatura y editorial</label>
+                        <label><input type="checkbox" value="patrimonio_material"> Patrimonio material</label>
+                        <label><input type="checkbox" value="gestion_cultural"> Gestión y producción cultural</label>
+                    </fieldset>
+                </div>
+                <!-- Infraestructura Cultural -->
+                <div class="filters-tab" id="infraestructura">
+                    <p>Contenido para infraestructura cultural...</p>
+                </div>
+            </div> <!-- Cierre del div "filters-content" -->
+            <button class="reset-filters">Restaurar Filtros</button>
+        </aside>
+        <!-- Contenedor del mapa -->
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
