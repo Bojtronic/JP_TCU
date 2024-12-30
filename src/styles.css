@@ -1,15 +1,20 @@
 /* Estilos generales */
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
   color: #333;
+  overflow-x: hidden;
 }
 
 /* Encabezado */
 header {
-  background: #fff;
+  background: #ffffff;
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
 }
@@ -18,10 +23,18 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .logo {
   max-height: 50px;
+  max-width: 100%;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .header-buttons button {
@@ -30,17 +43,18 @@ header {
   border: none;
   border-radius: 20%;
   padding: 10px 15px;
-  margin-left: 10px;
   cursor: pointer;
+  max-width: 100%;
 }
 
 .header-buttons button:hover {
   background-color: #0078D7;
 }
 
+/* Navbar */
 .navbar {
-  background: #0c971f;
-  color: white;
+  background-color: #0078D7;
+  padding: 10px 0;
 }
 
 .navbar ul {
@@ -49,10 +63,11 @@ header {
   display: flex;
   justify-content: center;
   margin: 0;
+  flex-wrap: wrap;
 }
 
 .navbar ul li {
-  margin: 0 15px;
+  margin: 10px 15px;
 }
 
 .navbar ul li a {
@@ -77,17 +92,64 @@ section {
 .banner {
   background: url('banner.jpg') no-repeat center center/cover;
   text-align: center;
-  color: white;
+  color: rgb(47, 66, 53);
   margin-bottom: 20px;
+  width: 100%; 
+  max-width: 100vw; 
+  overflow: hidden; 
 }
 
 .banner h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
+  word-wrap: break-word;
 }
 
 .banner p {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
+
+/* Mapa Cultural */
+.map-promo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.map-preview {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.map-description {
+  flex: 1;
+  max-width: 600px;
+  text-align: center;
+}
+
+.map-description h2 {
+  margin-bottom: 10px;
+}
+
+.map-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #00b5d8;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.map-button:hover {
+  background-color: #0078D7;
+}
+
 
 /* Directorio Cultural */
 .directorio {
@@ -103,140 +165,85 @@ section {
 
 .icon-grid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  margin-top: 20px;
 }
 
 .icon-item {
   text-align: center;
+  max-width: 150px;
+  overflow: hidden;
 }
 
 .icon-item img {
-  max-width: 50px;
-  margin-bottom: 10px;
-}
-
-/* Mapa Cultural */
-.map-promo {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.map-preview {
   width: 100%;
-  max-width: 600px;
+  height: auto;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.map-description h2 {
-  font-size: 24px;
-  color: #333;
+/* Media Queries */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .banner h1 {
+    font-size: 1.5rem;
+  }
+
+  .banner p {
+    font-size: 0.9rem;
+  }
+
+  .icon-grid {
+    flex-direction: column;
+  }
+
+  .icon-item {
+    max-width: 100%;
+  }
+
+  .map-promo {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .map-preview {
+    max-width: 100%;
+  }
+
+  .map-description {
+    max-width: 100%;
+    text-align: center;
+  }
 }
 
-.map-description p {
-  font-size: 16px;
-  color: #555;
-}
+@media (max-width: 480px) {
+  .header-buttons {
+    flex-direction: column;
+    gap: 5px;
+  }
 
-.map-button {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: #007bff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
+  .banner h1 {
+    font-size: 1.2rem;
+  }
 
-.map-button:hover {
-  background-color: #0056b3;
-}
+  .banner p {
+    font-size: 0.8rem;
+  }
 
-/* Pie de página */
-footer {
-  background: #333;
-  color: white;
-  text-align: center;
-  padding: 10px;
-}
+  .navbar ul li {
+    margin: 5px 0;
+  }
 
-
-.agenda-cultural {
-  margin: 40px 0;
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.agenda-cultural h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #007bff;
-}
-
-.filters {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.filters input,
-.filters select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  flex: 1;
-}
-
-.filters button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.filters button:hover {
-  background-color: #0056b3;
-}
-
-.event-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.event-item {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-}
-
-.event-item h4 {
-  color: #333;
-  margin: 10px 0;
-}
-
-.event-item p {
-  color: #555;
-}
-
-.event-item button {
-  margin-top: 10px;
-  background-color: #28a745;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.event-item button:hover {
-  background-color: #218838;
+  .map-preview {
+    border-radius: 5px;
+  }
 }
