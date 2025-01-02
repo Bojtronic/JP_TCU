@@ -4,11 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Mapa interactivo con filtros para sectores culturales e infraestructura cultural.">
-    <title>Mapa con Filtros</title>
+    <link rel="stylesheet" href="../styles/general.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link rel="stylesheet" href="map.css">
+    <link rel="stylesheet" href="../styles/map.css">
+    <title>Mapa con Filtros</title>
 </head>
 <body>
+    <!-- Encabezado -->
+    <header>
+      <div class="header-container">
+        <img src="../../images/sicultura_logo.jpg" alt="Logo Sicultura" class="logo">
+        <div class="header-buttons">
+            <button type="button">Solicitar cuenta</button>
+            <button type="button">Iniciar sesión</button>
+        </div>
+      </div>
+      <nav class="navbar">
+        <ul>
+          <li><a href="../../index.html">Inicio</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropbtn">Directorios</a>
+            <div class="dropdown-content">
+              <a href="./directorio_cultural.html">Directorio cultural</a>
+            </div>
+          </li>
+          <li><a href=".agenda_cultural.html">Agenda Cultural</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropbtn">Estadísticas</a>
+            <div class="dropdown-content">
+              <a href="./encuestas.html">Encuesta nacional de cultura</a>
+              <a href="#">Cuenta satélite de cultura</a>
+              <a href="#">Atlas cultural</a>
+              <a href="#">Gasto público en cultura</a>
+              <a href="#">Sistema de registros administrativos del ministerio de cultura y juventud</a>
+            </div>
+          </li>
+          <li><a href="./biblioteca.html">Biblioteca</a></li>
+          <li><a href="./mapa_cultural.html">Mapa Cultural</a></li>
+        </ul>
+      </nav>
+    </header>
+
+
+
+
+    
     <div class="container">
         <!-- Panel de filtros -->
         <aside class="filters-panel">
@@ -46,6 +86,6 @@
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+    <script src="../scripts/map.js"></script>
 </body>
 </html>
