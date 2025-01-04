@@ -1,49 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/general.css">
     <title>Agenda cultural</title>
+    <link rel="stylesheet" href="../styles/agenda_cultural.css">
 </head>
 <body>
-    <!-- Encabezado -->
     <header>
-      <div class="header-container">
-        <img src="../../images/sicultura_logo.jpg" alt="Logo Sicultura" class="logo">
-        <div class="header-buttons">
-            <button type="button">Solicitar cuenta</button>
-            <button type="button">Iniciar sesión</button>
-        </div>
-      </div>
-      <nav class="navbar">
-        <ul>
-          <li><a href="../../index.html">Inicio</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropbtn">Directorios</a>
-            <div class="dropdown-content">
-              <a href="./directorio_cultural.html">Directorio cultural</a>
-            </div>
-          </li>
-          <li><a href="./agenda_cultural.html">Agenda Cultural</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropbtn">Estadísticas</a>
-            <div class="dropdown-content">
-              <a href="./encuestas.html">Encuesta nacional de cultura</a>
-              <a href="#">Cuenta satélite de cultura</a>
-              <a href="#">Atlas cultural</a>
-              <a href="#">Gasto público en cultura</a>
-              <a href="#">Sistema de registros administrativos del ministerio de cultura y juventud</a>
-            </div>
-          </li>
-          <li><a href="./biblioteca.html">Biblioteca</a></li>
-          <li><a href="./mapa_cultural.html">Mapa Cultural</a></li>
-        </ul>
-      </nav>
+      <h1>Próximos eventos</h1>
     </header>
-
-
+    <main>
+      <!-- Evento destacado -->
+      <section class="evento-destacado">
+          <div class="evento-texto">
+              <p class="fecha">lunes 1 de enero - 8:00 a.m.</p>
+              <h2>PREMIO CRÍTICA JOVEN AICA 2024</h2>
+              <h3>Convocatoria</h3>
+              <p>
+                  El capítulo costarricense de la Asociación Internacional de Críticos de Arte convoca oficialmente a escritores jóvenes interesados en el arte y la cultura a participar en la categoría especial del Premio de la Crítica AICA que tendrá su tercera edición este 2024...
+              </p>
+              <button class="btn">Ver este evento</button>
+          </div>
+          <div class="evento-imagen">
+              <img src="../../images/eventos_logo.jpg" alt="Premio Crítica Joven AICA 2024">
+          </div>
+      </section>
+  
+      <p id="event-count" style="display: flex; justify-content: center;">Mostrando 1 - X de Y</p>
+      
+      <!-- Navegación de pestañas -->
+      <section class="eventos-tabs">
+        <div id="navegacion">
+            <button id="prev-btn" class="nav-btn">← Anterior</button>
+            <span id="event-count"></span>
+            <button id="next-btn" class="nav-btn">Siguiente →</button>
+        </div>
+        <div id="eventos-container" class="eventos"></div>
+    </section>
     
-    Agenda cultural
+  </main> 
+  <script src="../scripts/agenda_cultural.js"></script> 
 </body>
 </html>
