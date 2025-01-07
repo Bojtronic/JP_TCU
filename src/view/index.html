@@ -3,44 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./src/styles/general.css">
+  <link rel="stylesheet" href="../styles/general.css">
   <title>Homepage</title>
 </head>
 <body>
   <!-- Encabezado -->
-  <header>
-    <div class="header-container">
-      <img src="./images/sicultura_logo.jpg" alt="Logo Sicultura" class="logo">
-      <div class="header-buttons">
-          <button type="button">Solicitar cuenta</button>
-          <button type="button">Iniciar sesión</button>
-      </div>
-    </div>
-    <nav class="navbar">
-      <ul>
-        <li><a href="./index.html">Inicio</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropbtn">Directorios</a>
-          <div class="dropdown-content">
-            <a href="./src/view/directorio_cultural.html">Directorio cultural</a>
-          </div>
-        </li>
-        <li><a href="./src/view/agenda_cultural.html">Agenda Cultural</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropbtn">Estadísticas</a>
-          <div class="dropdown-content">
-            <a href="./src/view/encuestas.html">Encuesta nacional de cultura</a>
-            <a href="#">Cuenta satélite de cultura</a>
-            <a href="#">Atlas cultural</a>
-            <a href="#">Gasto público en cultura</a>
-            <a href="#">Sistema de registros administrativos del ministerio de cultura y juventud</a>
-          </div>
-        </li>
-        <li><a href="./src/view/biblioteca.html">Biblioteca</a></li>
-        <li><a href="./src/view/mapa_cultural.html">Mapa Cultural</a></li>
-      </ul>
-    </nav>
-    </header>
+  <div id="header-container"></div>
+
     
   <!-- Banner -->
   <section class="banner">
@@ -60,19 +29,19 @@
     </p>
     <div class="icon-grid">
       <div class="icon-item">
-        <img src="../images/sicultura_logo.jpg" alt="Empresas, grupos y organizaciones">
+        <img src="../../images/sicultura_logo.jpg" alt="Empresas, grupos y organizaciones">
         <p>Empresas, grupos y organizaciones</p>
       </div>
       <div class="icon-item">
-        <img src="../images/sicultura_logo.jpg" alt="Personas">
+        <img src="../../images/sicultura_logo.jpg" alt="Personas">
         <p>Personas</p>
       </div>
       <div class="icon-item">
-        <img src="../images/sicultura_logo.jpg" alt="Festividades">
+        <img src="../../images/sicultura_logo.jpg" alt="Festividades">
         <p>Festividades</p>
       </div>
       <div class="icon-item">
-        <img src="../images/sicultura_logo.jpg" alt="Manifestaciones culturales">
+        <img src="../../images/sicultura_logo.jpg" alt="Manifestaciones culturales">
         <p>Manifestaciones culturales</p>
       </div>
     </div>
@@ -80,7 +49,7 @@
 
   <!-- Mapa Cultural -->
   <section class="map-promo">
-    <img src="../images/map_page.PNG" alt="Vista previa del mapa cultural" class="map-preview">
+    <img src="../../images/map_page.PNG" alt="Vista previa del mapa cultural" class="map-preview">
     <div class="map-description">
       <h2>Mapa Cultural</h2>
       <p>
@@ -115,20 +84,20 @@
       <h3>Próximos eventos</h3>
       <div class="event-list">
         <div class="event-item">
-          <img src="evento1.jpg" alt="Evento 1">
+          <img src="../../images/eventos_logo.jpg" alt="Evento 1">
           <h4>Premio Crítica Joven AICA 2024</h4>
           <p>Convocatoria abierta para jóvenes interesados en la crítica de arte. Fecha límite: 31 de diciembre, 2024.</p>
           <button>Ver más eventos</button>
         </div>
         <div class="event-grid">
           <div class="event-card">
-            <img src="evento2.jpg" alt="Evento 2">
+            <img src="../../images/eventos_logo.jpg" alt="Evento 2">
             <h4>Premios AICA Costa Rica</h4>
             <p>Evento especial para premiar a los críticos destacados.</p>
             <button>Más información</button>
           </div>
           <div class="event-card">
-            <img src="evento3.jpg" alt="Evento 3">
+            <img src="../../images/eventos_logo.jpg" alt="Evento 3">
             <h4>Conmemoración del Día del Arte</h4>
             <p>Charlas y talleres sobre el impacto del arte en la sociedad.</p>
             <button>Más información</button>
@@ -171,8 +140,8 @@
   <div class="footer-container">
     <!-- Logos y contacto -->
     <div class="footer-logos">
-      <img src="ruta_logo_gobierno.png" alt="Gobierno de Costa Rica" class="logo">
-      <img src="ruta_logo_sicultura.png" alt="SiCultura" class="logo">
+      <img src="../../images/gobierno_cr.jpg" alt="Gobierno de Costa Rica" class="logo">
+      <img src="../../images/sicultura_logo.jpg" alt="SiCultura" class="logo">
     </div>
     <div class="footer-contact">
       <h3>Contáctenos</h3>
@@ -183,16 +152,17 @@
     <!-- Redes sociales -->
     <div class="footer-social">
       <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-        <img src="ruta_icono_facebook.png" alt="Facebook">
+        <img src="../../images/facebook_logo.jpg" alt="Facebook">
       </a>
       <a href="https://youtube.com" target="_blank" aria-label="YouTube">
-        <img src="ruta_icono_youtube.png" alt="YouTube">
+        <img src="../../images/youtube_logo.jpg" alt="YouTube">
       </a>
       <a href="mailto:info@cultura.cr" aria-label="Correo electrónico">
-        <img src="ruta_icono_email.png" alt="Correo">
+        <img src="../../images/correo_logo.png" alt="Correo">
       </a>
     </div>
   </div>
 </footer>
+<script src="../scripts/load_header.js" defer></script>
 </body>
 </html>

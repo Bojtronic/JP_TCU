@@ -4,14 +4,24 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
-    display: flex;
     height: 100vh;
-  }
+    display: flex;
+    flex-direction: column; /* Permite apilar el header sobre el contenido */
+}
 
+#header-container {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
 
 .container {
     display: flex;
-    width: 100%;
+    flex: 1; /* Permite que el contenedor ocupe el resto del espacio */
+    overflow: hidden; /* Evita desplazamientos no deseados */
 }
 
 .filters-panel {
@@ -75,4 +85,5 @@ label {
 #map {
     width: 75%;
     height: 100%;
+    overflow: hidden;
 }
