@@ -1,0 +1,90 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+    color: #2c3e50;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Directorio de Emprendimiento Section */
+  .directorio-emprendimiento {
+    background-color: white;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+  
+  .directorio-emprendimiento h2 {
+    font-size: 24px;
+    color: #004578; /* Azul oscuro */
+    margin-bottom: 15px;
+  }
+  
+  .directorio-emprendimiento p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #34495e;
+  }
+  
+  /* Primary Button */
+  .btn-primary {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #a3dbe5;
+    color: #004578;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #88cbd5;
+  }
+  
+  /* Categories Section */
+  .categories {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .category {
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .capacitacion {
+    background-color: #a3dbe5; /* Azul claro */
+  }
+  
+  .financiamiento {
+    background-color: #b7d9f1; /* Azul pastel */
+  }
+  
+  .acompanamiento {
+    background-color: #f9d3b4; /* Naranja pastel */
+  }
+  
+  .category:hover {
+    transform: translateX(5px);
+  }
+  
