@@ -4,23 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/general.css">
+    <link rel="stylesheet" href="../styles/estadisticas.css">
     <title>Estadísticas</title>
 </head>
 <body>
     <!-- Encabezado -->
     <div id="header-container"></div>
 
+    <!-- Sección de pestañas -->
+    <div class="tabs-container">
+        <!-- Botones de pestañas -->
+        <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="1">Pestaña 1</button>
+            <button class="tab-btn" data-tab="2">Pestaña 2</button>
+            <button class="tab-btn" data-tab="3">Pestaña 3</button>
+            <button class="tab-btn" data-tab="4">Pestaña 4</button>
+            <button class="tab-btn" data-tab="5">Pestaña 5</button>
+        </div>
 
-
-
-
-    
-    Estadísticas
+        <!-- Contenido de las pestañas -->
+        <div id="tab-1" class="tab-content active">
+            <h2>Contenido de la Pestaña 1</h2>
+            <p>Información relevante para la primera pestaña.</p>
+        </div>
+        <div id="tab-2" class="tab-content">
+            <h2>Contenido de la Pestaña 2</h2>
+            <p>Información relevante para la segunda pestaña.</p>
+        </div>
+        <div id="tab-3" class="tab-content">
+            <h2>Contenido de la Pestaña 3</h2>
+            <p>Información relevante para la tercera pestaña.</p>
+        </div>
+        <div id="tab-4" class="tab-content">
+            <h2>Contenido de la Pestaña 4</h2>
+            <p>Información relevante para la cuarta pestaña.</p>
+        </div>
+        <div id="tab-5" class="tab-content">
+            <h2>Contenido de la Pestaña 5</h2>
+            <p>Información relevante para la quinta pestaña.</p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <div id="footer-container"></div>
 
     <script src="../scripts/load_header.js" defer></script>
     <script src="../scripts/load_footer.js" defer></script>
+    <script>
+        // Manejo de las pestañas
+        const tabButtons = document.querySelectorAll(".tab-btn");
+        const tabContents = document.querySelectorAll(".tab-content");
+
+        tabButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                // Eliminar la clase 'active' de todos los botones y contenidos
+                tabButtons.forEach(btn => btn.classList.remove("active"));
+                tabContents.forEach(content => content.classList.remove("active"));
+
+                // Activar el botón y el contenido correspondientes
+                button.classList.add("active");
+                const targetTab = document.getElementById(`tab-${button.dataset.tab}`);
+                targetTab.classList.add("active");
+            });
+        });
+    </script>
 </body>
 </html>
