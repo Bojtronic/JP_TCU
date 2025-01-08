@@ -22,9 +22,9 @@
 }
 
 .tab-buttons button.active {
-    background-color: #005f3c;
+    background-color: #0b35a8;
     color: #fff;
-    border-color: #005f3c;
+    border-color: #070bf7;
 }
 
 .tab-content {
