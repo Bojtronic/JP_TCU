@@ -5,11 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/general.css">
     <link rel="stylesheet" href="../styles/estadisticas.css">
+    <link rel="stylesheet" href="../styles/footer.css">
     <title>Estadísticas</title>
 </head>
 <body>
     <!-- Encabezado -->
-    <div id="header-container"></div>
+    <header class="main-header">
+        <div class="header-container">
+          <img src="../../images/sicultura_logo.jpg" alt="Logo Sicultura" class="logo">
+          <div class="header-buttons">
+            <button type="button">Solicitar cuenta</button>
+            <button type="button">Iniciar sesión</button>
+          </div>
+        </div>
+        <nav class="navbar">
+          <ul>
+            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="./directorio_cultural.html">Directorios</a></li>
+            <li><a href="./agenda_cultural.html">Agenda Cultural</a></li>
+            <li><a href="./estadisticas.html">Estadísticas</a></li>
+            <li><a href="./biblioteca.html">Biblioteca</a></li>
+            <li><a href="./mapa_cultural.html">Mapa Cultural</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      
 
     <!-- Sección de pestañas -->
     <div class="tabs-container">
@@ -24,49 +45,203 @@
 
         <!-- Contenido de las pestañas -->
         <div id="tab-1" class="tab-content active">
-            <h2>Encuesta nacional de cultura</h2>
-            <p>Información relevante para la primera pestaña.</p>
+          <div class="container">
+            <div class="content">
+              <h1>Encuesta Nacional de Cultura</h1>
+              <p>
+                El Ministerio de Cultura y Juventud, desde la Unidad de Cultura y Economía, 
+                junto con el Instituto Nacional de Estadística y Censos, realizó la Encuesta Nacional de Cultura (ENC) 2016, 
+                que tiene como objetivo proveer a la sociedad de información estadística sobre diversos aspectos del sector cultural costarricense, 
+                que facilite la formulación, seguimiento y evaluación de políticas públicas, así como de acciones privadas y civiles orientadas hacia su desarrollo.
+              </p>
+              <p>
+                La encuesta se aplicó mediante entrevistas personales a una muestra de 6276 viviendas y 8033 personas distribuidas en todo el país. 
+                Los temas investigados son: audiovisual, música, publicaciones, tradiciones costarricenses, espacios culturales, actividades culturales, 
+                prácticas culturales, formación artística (no formal), actividades lúdicas, dispositivos tecnológicos e internet.
+              </p>
+            </div>
+            <div class="downloads">
+              <h2>Descargá la encuesta:</h2>
+              <ul>
+                <li>
+                  <a href="#">Libro: Encuesta Nacional de Cultura 2016: Principales resultados</a>
+                  <button>Descargar</button>
+                </li>
+                <li>
+                  <a href="#">Libro: Encuesta Nacional de Cultura 2013: Principales resultados</a>
+                  <button>Descargar</button>
+                </li>
+                <li>
+                  <a href="#">Análisis Económico de las Encuestas Nacionales de Cultura</a>
+                  <button>Descargar</button>
+                </li>
+                <li>
+                  <a href="#">Infografía Encuesta Nacional de Cultura 2016</a>
+                  <button>Descargar</button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+
+
+
         <div id="tab-2" class="tab-content">
-            <h2>Cuenta satelite de cultura</h2>
-            <p>Información relevante para la segunda pestaña.</p>
+          <div class="container">
+            <div class="content">
+              <h1>Cuenta Satélite de Cultura</h1>
+              <p>
+                La Cuenta Satélite de Cultura de Costa Rica (CSC) es un componente de la Unidad de Cultura y Economía del Ministerio de Cultura y Juventud, 
+                se caracteriza por ser un sistema de información que permite conocer las características económicas de la cultura y es diseñado como satélite del Sistema de Cuentas Nacionales, 
+                mediante la adopción de conceptos y técnicas que se plantean en el Manual Metodológico para la Implementación de Cuentas Satélite de Cultura en Latinoamérica del Convenio Andrés Bello, 
+                con el fin de visibilizar la contribución de la cultura a la economía costarricense de manera confiable, consistente y continua.
+              </p>
+              <p>
+                Su construcción está a cargo de una Comisión Interinstitucional (CICSC), compuesta por el Ministerio de Cultura y Juventud, 
+                el Banco Central de Costa Rica, el Instituto Nacional de Estadística y Censos, el Programa Estado de la Nación y el Consejo Nacional de Rectores. 
+                La CICSC ha contado con el apoyo técnico de Colombia y con la cooperación financiera de la Agencia Española de Cooperación Internacional para 
+                el Desarrollo y la Organización de Estados Iberoamericanos para la Educación, la Ciencia y la Cultura.
+              </p>
+            </div>
+            <div class="downloads">
+              <h2>Documentos Descargables:</h2>
+              <ul>
+                <li>
+                  <a href="#">Metodología de medición</a>
+                  <button>Descargar</button>
+                </li>
+                <li>
+                  <a href="#">Ficha metodológica</a>
+                  <button>Descargar</button>
+                </li>
+                <li>
+                  <a href="#">Resumen ejecutivo</a>
+                  <button>Descargar</button>
+                </li>
+                <li>
+                  <a href="#">Resumen de indicadores</a>
+                  <button>Descargar</button>
+                </li>
+                <li>
+                  <a href="#">Presentación de resultados</a>
+                  <button>Descargar</button>
+                </li>
+                <li>
+                  <a href="#">Metadato CSC</a>
+                  <button>Descargar</button>
+                </li>
+                <li>
+                  <a href="#">Calendario de publicación</a>
+                  <button>Descargar</button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+
+
+
+
+
         <div id="tab-3" class="tab-content">
             <h2>Atlas cultural</h2>
-            <p>Información relevante para la tercera pestaña.</p>
+            <p>
+              The standard Lorem Ipsum passage, used since the 1500s
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+              dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+              Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+              inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+              sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, 
+              adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum 
+              exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit 
+              esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+            </p>
         </div>
+
+
+
+
+
         <div id="tab-4" class="tab-content">
-            <h2>Gasto publico en cultura</h2>
-            <p>Información relevante para la cuarta pestaña.</p>
+          <div class="container">
+            <div class="content">
+              <h1>Aporte económico del ámbito público a la cultura costarricense</h1>
+              <p>
+                Identifica la inversión que realizan las instituciones del ámbito o Sector Público en los distintos sectores y actividades económicas culturales.
+
+                Es una herramienta que pretende sensibilizar la participación de las instituciones públicas en el proceso de recolección de información.
+              </p>
+            </div>
+            <div class="downloads">
+              <h2>Documentos Descargables:</h2>
+              <ul>
+                <li>
+                  <a href="#">Resumen ejecutivo</a>
+                  <button>Descargar</button>
+                </li>
+                <li>
+                  <a href="#">Metodología</a>
+                  <button>Descargar</button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+
+
+
+
         <div id="tab-5" class="tab-content">
             <h2>Sistema de registros administrativos</h2>
-            <p>Información relevante para la quinta pestaña.</p>
+            <p>
+              The standard Lorem Ipsum passage, used since the 1500s
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+              dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+              Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+              inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+              sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, 
+              adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum 
+              exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit 
+              esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+            </p>
         </div>
     </div>
 
     <!-- Footer -->
-    <div id="footer-container"></div>
-
-    <script src="../scripts/load_header.js" defer></script>
-    <script src="../scripts/load_footer.js" defer></script>
-    <script>
-        // Manejo de las pestañas
-        const tabButtons = document.querySelectorAll(".tab-btn");
-        const tabContents = document.querySelectorAll(".tab-content");
-
-        tabButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                // Eliminar la clase 'active' de todos los botones y contenidos
-                tabButtons.forEach(btn => btn.classList.remove("active"));
-                tabContents.forEach(content => content.classList.remove("active"));
-
-                // Activar el botón y el contenido correspondientes
-                button.classList.add("active");
-                const targetTab = document.getElementById(`tab-${button.dataset.tab}`);
-                targetTab.classList.add("active");
-            });
-        });
-    </script>
+    <footer class="main-footer">
+      <div class="footer-container">
+        <!-- Logos y contacto -->
+        <div class="footer-logos">
+          <img src="../../images/gobierno_cr.jpg" alt="Gobierno de Costa Rica" class="logo">
+          <img src="../../images/sicultura_logo.jpg" alt="SiCultura" class="logo">
+        </div>
+        <div class="footer-contact">
+          <h3>Contáctenos</h3>
+          <p>Correo: <a href="mailto:info@cultura.cr">info@cultura.cr</a></p>
+          <p>Teléfono: +506 2255-3188 ext 270</p>
+          <a href="#" class="btn-secondary">Sugerencias o comentarios para SiCultura</a>
+        </div>
+        <!-- Redes sociales -->
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+            <img src="../../images/facebook_logo.jpg" alt="Facebook">
+          </a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+            <img src="../../images/youtube_logo.jpg" alt="YouTube">
+          </a>
+          <a href="mailto:info@cultura.cr" aria-label="Correo electrónico">
+            <img src="../../images/correo_logo.png" alt="Correo">
+          </a>
+        </div>
+      </div>
+    </footer>
+    
+    <script src="../scripts/estadisticas.js" defer></script>
 </body>
 </html>

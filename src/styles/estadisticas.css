@@ -38,3 +38,85 @@
 .tab-content.active {
     display: block;
 }
+
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .content {
+    flex: 2;
+  }
+  
+  .content h1 {
+    color: #1d4e89;
+    font-size: 1.8em;
+  }
+  
+  .content p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .downloads {
+    flex: 1;
+    background-color: #e8f6f9;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .downloads h2 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: #1d4e89;
+  }
+  
+  .downloads ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .downloads li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .downloads a {
+    color: #1d4e89;
+    text-decoration: none;
+  }
+  
+  .downloads a:hover {
+    text-decoration: underline;
+  }
+  
+  .downloads button {
+    background-color: #1d4e89;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .downloads button:hover {
+    background-color: #163b6d;
+  }
+  
