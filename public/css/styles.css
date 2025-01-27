@@ -1,30 +1,40 @@
+/* Reset básico */
+body, h1, ul, li, a {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-  }
-  
-  header {
-    background: #0078d7;
-    color: white;
-    padding: 1em 0;
-    text-align: center;
-  }
-  
-  main {
-    padding: 2em;
-    text-align: center;
-  }
-  
-  footer {
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 1em 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header styles */
+header {
+  padding: 10px 0;
+}
+
+.logo img {
+  height: 40px;
+  margin-left: 20px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.menu li {
+  padding: 10px 20px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.menu li a {
+  color: #fff;
+  font-family: 'Brush Script MT', cursive; /* Estilo manuscrito */
+  font-size: 20px;
+}

@@ -1,0 +1,90 @@
+:root {
+    --green-dark: rgb(31, 129, 0);
+    --green-strong: rgb(42, 169, 0);
+    --green-bright: rgb(54, 218, 0);
+    --lime-green: rgb(147, 218, 0);
+    --orange-yellow: rgb(231, 174, 21);
+    --orange: rgb(255, 114, 40);
+    --orange-dark: rgb(229, 86, 30);
+    --brown-dark: rgb(169, 94, 13);
+    --brown-light: rgb(135, 93, 45);
+    --blue-light: rgb(65, 155, 190);
+  
+    --bright-orange: #ff9036;
+    --dark-gray: #373442;
+    --red: #cf4c30;
+    --light-green: #8ae429;
+    --lime: #c7ce0a;
+    --light-blue: #669cc2;
+    --black: #000000;
+  }
+  
+ 
+  .green-dark {
+    background-color: var(--green-dark);
+  }
+  
+  .green-strong {
+    background-color: var(--green-strong);
+  }
+  
+  .green-bright {
+    background-color: var(--green-bright);
+  }
+  
+  .lime-green {
+    background-color: var(--lime-green);
+  }
+  
+  .orange-yellow {
+    background-color: var(--orange-yellow);
+  }
+  
+  .orange {
+    background-color: var(--orange);
+  }
+  
+  .orange-dark {
+    background-color: var(--orange-dark);
+  }
+  
+  .brown-dark {
+    background-color: var(--brown-dark);
+  }
+  
+  .brown-light {
+    background-color: var(--brown-light);
+  }
+  
+  .blue-light {
+    background-color: var(--blue-light);
+  }
+  
+  .bright-orange {
+    background-color: var(--bright-orange);
+  }
+  
+  .dark-gray {
+    background-color: var(--dark-gray);
+  }
+  
+  .red {
+    background-color: var(--red);
+  }
+  
+  .light-green {
+    background-color: var(--light-green);
+  }
+  
+  .lime {
+    background-color: var(--lime);
+  }
+  
+  .light-blue {
+    background-color: var(--light-blue);
+  }
+  
+  .black {
+    background-color: var(--black);
+  }
+  
