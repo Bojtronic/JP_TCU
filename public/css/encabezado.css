@@ -1,0 +1,27 @@
+header {
+    padding: 10px 0;
+  }
+  
+  .logo img {
+    height: 40px;
+    margin-left: 20px;
+  }
+  
+  .menu {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  
+  .menu li {
+    padding: 10px 20px;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .menu li a {
+    color: #fff;
+    font-family: 'Brush Script MT', cursive; /* Estilo manuscrito */
+    font-size: 20px;
+  }
+  
