@@ -1,27 +1,63 @@
+body, h1, ul, li, a {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+}
+
 header {
-    padding: 10px 0;
-  }
-  
-  .logo img {
-    height: 40px;
-    margin-left: 20px;
-  }
-  
-  .menu {
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-  }
-  
-  .menu li {
-    padding: 10px 20px;
-    font-size: 18px;
-    text-align: center;
-  }
-  
-  .menu li a {
-    color: #fff;
-    font-family: 'Brush Script MT', cursive; /* Estilo manuscrito */
-    font-size: 20px;
-  }
-  
+  display: flex;
+  align-items: center;
+  background-color: black;
+  padding: 0;
+}
+
+.logo {
+  background-color: black;
+  padding: 10px;
+}
+
+.logo img {
+  height: 100px;
+}
+
+nav {
+  flex-grow: 1;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu li {
+  flex: 1;
+  position: relative;
+  padding: 50px 30px;
+  text-align: center;
+}
+
+.menu li a {
+  color: white;
+  font-family: 'Brush Script MT', cursive;
+  font-size: 22px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu li:hover {
+  opacity: 0.5;
+}
+
+
