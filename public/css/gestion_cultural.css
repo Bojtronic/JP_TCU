@@ -9,3 +9,45 @@ img {
     display: block;
     margin: 0 auto;
 }
+
+.contenido-textual {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+.seccion-texto {
+    margin-bottom: 3rem;
+}
+
+.titulo-seccion {
+    color: var(--orange);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+}
+
+.descripcion {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .contenido-textual {
+        padding: 0 1rem;
+    }
+    
+    .titulo-seccion {
+        font-size: 1.8rem;
+    }
+    
+    .descripcion {
+        font-size: 1rem;
+    }
+}
