@@ -29,12 +29,39 @@
             </ul>
         </nav>
     </header>
-    
+
     <img class="imagen-responsive" src="../images/6/propuesta-web-ade_03.jpg" alt="Contacto">
+    
+    <main class="contacto-container">
+        <section class="form-section">
+            <h1>¡Escribenos!</h1>
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="contacto">Contacto (teléfono o email):</label>
+                    <input type="text" id="contacto" name="contacto" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <!-- <button type="button" id="btnEnviarEmail" class="btn-email">Enviar por Email</button> -->
+                    <button type="button" id="btnEnviarWhatsApp" class="btn-whatsapp">Enviar por WhatsApp</button>
+                </div>
+            </form>
+        </section>
+    </main>
 
     <img class="imagen-responsive" src="../images/6/propuesta-web-ade_04.gif" alt="Contacto">
 
-    <img class="imagen-responsive" src="../images/6/propuesta-web-ade_14.gif" alt="Contacto">
+    <a href="https://www.facebook.com/adeculturaspalmares" target="_blank" class="imagen-con-enlace">
+        <img class="imagen-responsive" src="../images/6/propuesta-web-ade_14.gif" alt="Síguenos en Facebook">
+    </a>
 
+    <script src="../js/contacto.js"></script>
 </body>
 </html>
