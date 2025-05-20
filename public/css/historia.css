@@ -9,3 +9,29 @@ img {
     display: block;
     margin: 0 auto;
 }
+
+.proyecto-container {
+    display: flex;
+    align-items: center;
+    margin: 30px 0; /* Más espacio entre proyectos */
+    padding: 15px;
+    background-color: rgba(0,0,0,0.1); /* Fondo sutil para cada proyecto */
+    border-radius: 8px; /* Esquinas redondeadas */
+}
+
+.proyecto-container:nth-child(odd) {
+    background-color: rgba(0,0,0,0.2); /* Alternar colores para mejor legibilidad */
+}
+
+.proyecto-explicacion h3 {
+    color: var(--orange); /* Color destacado para títulos */
+    margin-bottom: 10px;
+    font-family: 'Dancing Script', cursive;
+}
+
+@media (max-width: 768px) {
+    .proyecto-container {
+        margin: 20px 0;
+        padding: 10px;
+    }
+}
