@@ -36,61 +36,28 @@
 
     <img class="imagen-responsive" src="../images/2/propuesta-web-ade_03.gif" alt="Historia">
 
-    <!-- Primer proyecto -->
-    <div class="proyecto-container">
-        <div class="proyecto-imagen">
-            <img src="../images/proyecto_cultural.gif" alt="Proyecto 1">
-        </div>
-        <div class="proyecto-explicacion">
-            <h3>Proyecto Cultural 1</h3>
-            <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        </div>
-    </div>
-
-    <!-- Segundo proyecto -->
-    <div class="proyecto-container">
-        <div class="proyecto-imagen">
-            <img src="../images/proyecto_cultural.gif" alt="Proyecto 2">
-        </div>
-        <div class="proyecto-explicacion">
-            <h3>Proyecto Cultural 2</h3>
-            <p>It has survived not only five centuries, but also the leap into electronic typesetting,
-                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages.</p>
+    <!-- Controles para agregar nuevos proyectos -->
+    <div class="controles-proyectos">
+        <h2>Agregar Nuevo Proyecto</h2>
+        <div class="formulario-proyecto">
+            <input type="text" id="nuevo-titulo" placeholder="Título del proyecto">
+            <textarea id="nueva-descripcion" placeholder="Descripción del proyecto"></textarea>
+            <input type="file" id="nueva-imagen" accept="image/*">
+            <div class="botones-accion">
+                <button class="boton boton-agregar" onclick="agregarProyecto()">Agregar Proyecto</button>
+            </div>
         </div>
     </div>
-
-    <!-- Tercer proyecto -->
-    <div class="proyecto-container">
-        <div class="proyecto-imagen">
-            <img src="../images/proyecto_cultural.gif" alt="Proyecto 3">
-        </div>
-        <div class="proyecto-explicacion">
-            <h3>Proyecto Cultural 3</h3>
-            <p>And more recently with desktop publishing software like Aldus PageMaker including versions of Lorem
-                Ipsum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt.
-            </p>
-        </div>
-    </div>
-
-    <!-- Cuarto proyecto -->
-    <div class="proyecto-container">
-        <div class="proyecto-imagen">
-            <img src="../images/proyecto_cultural.gif" alt="Proyecto 4">
-        </div>
-        <div class="proyecto-explicacion">
-            <h3>Proyecto Cultural 4</h3>
-            <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec
-                velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur aliquet quam id dui
-                posuere blandit.</p>
-        </div>
+    
+    <!-- Contenedor de proyectos (se llenará dinámicamente) -->
+    <div id="contenedor-proyectos">
+        <!-- Los proyectos se insertarán aquí -->
     </div>
 
     <img class="imagen-responsive" src="../images/2/propuesta-web-ade_05.gif" alt="Historia">
 
+
+    <script src="../js/historia.js"></script>
 </body>
 
 </html>
