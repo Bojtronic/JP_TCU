@@ -9,3 +9,167 @@ img {
     display: block;
     margin: 0 auto;
 }
+
+.proyecto-container {
+    display: flex;
+    align-items: center;
+    margin: 30px auto;
+    /* Centrado horizontal con margen */
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 1200px;
+    /* Ancho máximo para no sobrepasar pantallas grandes */
+    width: 95%;
+    /* Ocupa el 95% del contenedor padre */
+    box-sizing: border-box;
+    /* Incluye padding en el ancho total */
+}
+
+
+
+.proyecto-imagen {
+    flex: 0 0 35%;
+    /* No crece, no encoge, ancho base del 35% */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.proyecto-imagen img {
+    width: 100%;
+    /* La imagen ocupa todo el ancho de su contenedor */
+    height: auto;
+    display: block;
+    border-radius: 4px;
+}
+
+.proyecto-explicacion {
+    flex: 0 0 65%;
+    /* No crece, no encoge, ancho base del 65% */
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+
+.proyecto-explicacion h3 {
+    color: var(--orange);
+    margin-bottom: 10px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+}
+
+.proyecto-explicacion p {
+    color: white;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+/* Alternar colores de fondo */
+.proyecto-container:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive para tablets */
+@media (max-width: 992px) {
+    .proyecto-container {
+        width: 98%;
+        padding: 12px;
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .proyecto-container {
+        flex-direction: column;
+        width: 100%;
+        margin: 20px 0;
+        padding: 10px;
+    }
+
+    .proyecto-imagen,
+    .proyecto-explicacion {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    .proyecto-imagen {
+        margin-bottom: 15px;
+    }
+
+    .proyecto-explicacion h3 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .proyecto-explicacion p {
+        font-size: 14px;
+        text-align: justify;
+    }
+}
+
+.controles-proyectos {
+    max-width: 1200px;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.formulario-proyecto {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formulario-proyecto input,
+.formulario-proyecto textarea {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.formulario-proyecto textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.botones-accion {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.boton {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.boton-agregar {
+    background-color: var(--green-strong);
+    color: white;
+}
+
+.boton-editar,
+.boton-guardar {
+    background-color: var(--blue-light);
+    color: white;
+}
+
+.boton-eliminar {
+    background-color: var(--red);
+    color: white;
+}
+
+.boton-cancelar {
+    background-color: var(--orange);
+    color: white;
+}
+
+.acciones-proyecto {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}

@@ -10,167 +10,97 @@ img {
     margin: 0 auto;
 }
 
-/* Estilos para los proyectos */
-.proyecto-container {
-    display: flex;
-    align-items: center;
-    margin: 30px auto;
-    /* Centrado horizontal con margen */
-    padding: 15px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+/* Estilos para las definiciones culturales */
+.contenido-principal {
     max-width: 1200px;
-    /* Ancho máximo para no sobrepasar pantallas grandes */
-    width: 95%;
-    /* Ocupa el 95% del contenedor padre */
-    box-sizing: border-box;
-    /* Incluye padding en el ancho total */
+    margin: 0 auto;
+    padding: 30px 20px;
 }
 
-
-
-.proyecto-imagen {
-    flex: 0 0 35%;
-    /* No crece, no encoge, ancho base del 35% */
-    padding: 10px;
-    box-sizing: border-box;
+.definiciones-cultura {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
 }
 
-.proyecto-imagen img {
-    width: 100%;
-    /* La imagen ocupa todo el ancho de su contenedor */
-    height: auto;
-    display: block;
-    border-radius: 4px;
+.concepto-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.proyecto-explicacion {
-    flex: 0 0 65%;
-    /* No crece, no encoge, ancho base del 65% */
-    padding: 10px 15px;
-    box-sizing: border-box;
+.articulacion {
+    border-left: 5px solid var(--blue-light);
 }
 
-.proyecto-explicacion h3 {
-    color: var(--orange);
-    margin-bottom: 10px;
-    font-family: 'Dancing Script', cursive;
-    font-size: 24px;
+.participacion {
+    border-left: 5px solid var(--orange-yellow);
 }
 
-.proyecto-explicacion p {
+.concepto-titulo {
     color: white;
-    line-height: 1.5;
-    font-size: 16px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-/* Alternar colores de fondo */
-.proyecto-container:nth-child(odd) {
+.concepto-contenido {
+    color: #f0f0f0;
+    line-height: 1.6;
+}
+
+.concepto-contenido ul {
+    padding-left: 20px;
+    margin: 15px 0;
+}
+
+.concepto-contenido li {
+    margin-bottom: 8px;
+}
+
+.ejemplo {
+    font-style: italic;
     background-color: rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    border-radius: 5px;
+    margin-top: 15px;
 }
 
-/* Responsive para tablets */
-@media (max-width: 992px) {
-    .proyecto-container {
-        width: 98%;
-        padding: 12px;
-    }
-}
-
-/* Responsive para móviles */
-@media (max-width: 768px) {
-    .proyecto-container {
-        flex-direction: column;
-        width: 100%;
-        margin: 20px 0;
-        padding: 10px;
-    }
-
-    .proyecto-imagen,
-    .proyecto-explicacion {
-        flex: 1 1 100%;
-        width: 100%;
-    }
-
-    .proyecto-imagen {
-        margin-bottom: 15px;
-    }
-
-    .proyecto-explicacion h3 {
-        font-size: 20px;
-        text-align: center;
-    }
-
-    .proyecto-explicacion p {
-        font-size: 14px;
-        text-align: justify;
-    }
-}
-
-.controles-proyectos {
-    max-width: 1200px;
-    width: 95%;
-    margin: 20px auto;
+.diferencia-clave {
+    background-color: rgba(31, 129, 0, 0.2);
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
 }
 
-.formulario-proyecto {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.diferencia-titulo {
+    color: var(--lime-green);
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
-.formulario-proyecto input,
-.formulario-proyecto textarea {
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.formulario-proyecto textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.botones-accion {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.boton {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.destacado-articulacion {
+    color: var(--blue-light);
     font-weight: bold;
 }
 
-.boton-agregar {
-    background-color: var(--green-strong);
-    color: white;
+.destacado-participacion {
+    color: var(--orange-yellow);
+    font-weight: bold;
 }
 
-.boton-editar,
-.boton-guardar {
-    background-color: var(--blue-light);
-    color: white;
+/* Responsive */
+@media (max-width: 768px) {
+    .concepto-box {
+        padding: 15px;
+    }
+    
+    .concepto-titulo {
+        font-size: 28px;
+    }
 }
 
-.boton-eliminar {
-    background-color: var(--red);
-    color: white;
-}
-
-.boton-cancelar {
-    background-color: var(--orange);
-    color: white;
-}
-
-.acciones-proyecto {
-    display: flex;
-    gap: 5px;
-    margin-top: 10px;
-}
