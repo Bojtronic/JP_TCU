@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/calendario_cultural.css">
     <link rel="stylesheet" href="../css/encabezado.css">
     <link rel="stylesheet" href="../css/general.css">
-    <title>Calendario cultural</title>
+    <title>Calendario Cultural</title>
 </head>
 <body class="orange">
     <header class="black">
@@ -32,7 +32,33 @@
     
     <img class="imagen-responsive" src="../images/5/propuesta-web-ade_03.jpg" alt="Calendario cultural">
 
-    <img class="imagen-responsive" src="../images/5/propuesta-web-ade_04.gif" alt="Calendario cultural">
+    <main class="calendario-container">
+        <h1>Calendario Cultural</h1>
+        
+        <div class="controles-calendario">
+            <button id="btn-anterior" class="boton-calendario">‹</button>
+            <h2 id="titulo-mes-actual" class="titulo-mes"></h2>
+            <h2 id="titulo-mes-siguiente" class="titulo-mes"></h2>
+            <button id="btn-siguiente" class="boton-calendario">›</button>
+        </div>
+        
+        <div class="calendario-meses">
+            <div class="mes-container" id="mes-actual"></div>
+            <div class="mes-container" id="mes-siguiente"></div>
+        </div>
+        
+        <div id="modal-evento" class="modal">
+            <div class="modal-contenido">
+                <span class="cerrar-modal">&times;</span>
+                <h3 id="modal-titulo"></h3>
+                <p id="modal-fecha" class="fecha-evento"></p>
+                <p id="modal-descripcion"></p>
+                <img id="modal-imagen" src="" alt="Imagen del evento" class="imagen-modal">
+                <p id="modal-lugar" class="lugar-evento"></p>
+            </div>
+        </div>
+    </main>
 
+    <script src="../js/calendario_cultural.js"></script>
 </body>
 </html>

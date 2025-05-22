@@ -1,11 +1,191 @@
-h1{
+img {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Estilos base */
+.calendario-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: white;
+}
+
+h1 {
     color: white;
     font-family: 'Dancing Script', cursive;
     font-size: 40px;
     font-style: italic;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-img {
-    display: block;
-    margin: 0 auto;
+/* Controles del calendario */
+.controles-calendario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.titulo-mes {
+    margin: 0 15px;
+    font-size: 24px;
+    color: var(--orange-yellow);
+    min-width: 200px;
+    text-align: center;
+}
+
+.boton-calendario {
+    background-color: var(--orange-dark);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.boton-calendario:hover {
+    background-color: var(--brown-light);
+}
+
+/* Grid de meses */
+.calendario-meses {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.mes-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* Tabla del calendario */
+.calendario-mes {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calendario-mes th {
+    color: var(--lime-green);
+    padding: 10px;
+    text-align: center;
+}
+
+.calendario-mes td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.calendario-mes td:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dia-actual {
+    background-color: var(--orange) !important;
+    font-weight: bold;
+}
+
+.dia-con-evento {
+    background-color: var(--green-strong);
+    position: relative;
+}
+
+.dia-con-evento::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 6px;
+    height: 6px;
+    background-color: var(--orange-yellow);
+    border-radius: 50%;
+}
+
+/* Modal de eventos */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-contenido {
+    background-color: var(--brown-dark);
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+}
+
+.cerrar-modal {
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cerrar-modal:hover {
+    color: var(--orange);
+}
+
+#modal-titulo {
+    color: var(--orange-yellow);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.fecha-evento {
+    color: var(--lime-green);
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.imagen-modal {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.lugar-evento {
+    color: var(--blue-light);
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .calendario-meses {
+        grid-template-columns: 1fr;
+    }
+    
+    .controles-calendario {
+        flex-wrap: wrap;
+    }
+    
+    .modal-contenido {
+        width: 90%;
+        margin: 10% auto;
+    }
 }
