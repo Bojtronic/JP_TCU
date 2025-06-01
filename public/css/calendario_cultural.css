@@ -61,10 +61,27 @@ h1 {
     gap: 30px;
 }
 
-.mes-container {
+.mes-wrapper {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.titulo-mes {
+    margin: 0;
+    font-size: 24px;
+    color: var(--orange-yellow);
+    text-align: center;
     padding: 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.mes-container {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Tabla del calendario */
@@ -176,16 +193,86 @@ h1 {
 
 /* Responsive */
 @media (max-width: 760px) {
+    .calendario-container {
+        padding: 10px 5px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    h1 {
+        font-size: 2rem; /* Título más compacto */
+        margin: 15px 0;
+        text-align: center;
+        width: 100%;
+    }
+    
     .calendario-meses {
         grid-template-columns: 1fr;
+        gap: 15px; /* Espacio más reducido entre meses */
+        width: 90%;
+        max-width: 90%;
+        padding: 0 5px;
+        margin: 0 auto;
+    }
+    
+    .mes-wrapper {
+        margin-bottom: 15px;
+        background-color: rgba(255, 255, 255, 0.05); /* Fondo más sutil */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra más ligera */
+    }
+    
+    .titulo-mes {
+        font-size: 1.0rem; /* Tamaño más adecuado para móvil */
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.3); /* Mayor contraste */
+    }
+    
+    .mes-container {
+        padding: 8px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .calendario-mes {
+        min-width: 100%; /* Ocupa todo el ancho disponible */
+        width: 100%;
+        font-size: 0.9rem; /* Texto más compacto */
+    }
+    
+    .calendario-mes th,
+    .calendario-mes td {
+        padding: 8px 2px; /* Celdas más compactas */
+        height: 30px; /* Altura fija para uniformidad */
     }
     
     .controles-calendario {
         flex-wrap: wrap;
+        gap: 8px;
+        padding: 0 5px;
+        margin-bottom: 15px;
     }
     
-    .modal-contenido {
-        width: 90%;
-        margin: 10% auto;
+    .boton-calendario {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    
+    /* Ajustes para pantallas muy pequeñas */
+    @media (max-width: 400px) {
+        .calendario-mes {
+            font-size: 0.8rem;
+        }
+        
+        .calendario-mes th,
+        .calendario-mes td {
+            padding: 5px 1px;
+            height: 25px;
+        }
+        
+        .titulo-mes {
+            font-size: 0.9rem;
+        }
     }
 }

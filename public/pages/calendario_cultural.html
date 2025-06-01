@@ -37,15 +37,23 @@
         
         <div class="controles-calendario">
             <button id="btn-anterior" class="boton-calendario">‹</button>
-            <h2 id="titulo-mes-actual" class="titulo-mes"></h2>
-            <h2 id="titulo-mes-siguiente" class="titulo-mes"></h2>
+            
             <button id="btn-siguiente" class="boton-calendario">›</button>
         </div>
         
         <div class="calendario-meses">
+        <!-- Mes Actual -->
+        <div class="mes-wrapper">
+            <h2 id="titulo-mes-actual" class="titulo-mes"></h2>
             <div class="mes-container" id="mes-actual"></div>
+        </div>
+        
+        <!-- Mes Siguiente -->
+        <div class="mes-wrapper">
+            <h2 id="titulo-mes-siguiente" class="titulo-mes"></h2>
             <div class="mes-container" id="mes-siguiente"></div>
         </div>
+    </div>
         
         <div id="modal-evento" class="modal">
             <div class="modal-contenido">
