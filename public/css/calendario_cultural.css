@@ -69,7 +69,7 @@ h1 {
 
 /* Tabla del calendario */
 .calendario-mes {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
 }
 
@@ -175,7 +175,7 @@ h1 {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 760px) {
     .calendario-meses {
         grid-template-columns: 1fr;
     }
