@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,23 +11,7 @@
 </head>
 <body class="green-strong">
     <header class="black">
-        <div class="logo">
-            <a href="/pages/gestion_cultural.html">
-                <img src="../images/logo_BN_header.PNG" alt="ADE Culturas Palmareñas">
-            </a>
-        </div>
-        <nav>
-            <ul class="menu">
-                <li class="green-dark"><a href="/pages/historia.html">Historia</a></li>
-                <li class="green-strong"><a href="/pages/proyectos.html">Proyectos</a></li>
-                <li class="orange"><a href="/pages/mapa_cultural.html">Mapa Cultural</a></li>
-                <li class="orange-dark"><a href="/pages/calendario_cultural.html">Calendario Cultural</a></li>
-                <li class="brown-light"><a href="/pages/contacto.html">Contacto</a></li>
-                <li class="brown-dark"></li>
-                <li class="blue-light"></li>
-                <li class="blue-dark"></li>
-            </ul>
-        </nav>
+        <!-- Encabezado existente -->
     </header>
     
     <img class="imagen-responsive" src="../images/3/propuesta-web-ade_03.gif" alt="Proyectos">
@@ -36,17 +20,24 @@
     <div class="controles-proyectos">
         <h2>Agregar Nuevo Proyecto</h2>
         <div class="formulario-proyecto">
-            <input type="text" id="nuevo-titulo" placeholder="Título del proyecto">
-            <textarea id="nueva-descripcion" placeholder="Descripción del proyecto"></textarea>
-            <input type="file" id="nueva-imagen" accept="image/*">
+            <input type="text" id="nuevo-titulo" placeholder="Título del proyecto" required>
+            <textarea id="nueva-descripcion" placeholder="Descripción del proyecto" required></textarea>
+            
+            <div class="tipo-archivo">
+                <label><input type="radio" name="tipo-archivo" value="imagen" checked> Imagen</label>
+                <label><input type="radio" name="tipo-archivo" value="audio"> Audio</label>
+            </div>
+            
+            <input type="file" id="nuevo-archivo" accept="image/*,audio/*" required>
+            
             <div class="botones-accion">
                 <button class="boton boton-agregar" onclick="agregarProyecto()">Agregar Proyecto</button>
             </div>
         </div>
     </div>
     
-    <!-- Contenedor de proyectos (se llenará dinámicamente) -->
-    <div id="contenedor-proyectos">
+    <!-- Contenedor de proyectos -->
+    <div id="contenedor-proyectos" class="grid-proyectos">
         <!-- Los proyectos se insertarán aquí -->
     </div>
 
