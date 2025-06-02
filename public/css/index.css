@@ -1,4 +1,133 @@
-img {
-  display: block;
-  margin: 0 auto;
+.imagen-responsive {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100%;
 }
+
+/* Estilos generales para el contenedor */
+.login-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-logo {
+    display: grid;
+    place-items: center;
+    margin-bottom: 2rem;
+}
+
+.login-logo img {
+    max-width: 200px;
+}
+
+/* Estilos para el formulario */
+
+.login-form {
+    max-width: 300px; /* Ancho reducido del formulario */
+    margin: 0 auto; /* Centrado del formulario */
+}
+
+.form-group input {
+    width: 90%; /* Ancho reducido de los inputs */
+    padding: 0.6rem; /* Padding más pequeño */
+    margin: 0 auto; /* Centrado del input */
+    display: block; /* Necesario para que funcione el margin auto */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem; /* Tamaño de fuente reducido */
+    transition: border-color 0.3s;
+}
+
+.login-form h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 90%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Estilos para el botón */
+.login-button {
+    width: 90%; /* Mismo ancho que los inputs */
+    margin: 0 auto; /* Centrado */
+    display: block;
+    padding: 0.6rem; /* Mismo padding que los inputs */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem; /* Tamaño de fuente consistente */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para los enlaces */
+.login-links {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.login-links a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-container {
+        margin: 1rem auto; /* Centrado también en móvil */
+        padding: 1.5rem;
+    }
+
+    .login-form {
+        max-width: 90%; /* Más ancho en móvil para mejor usabilidad */
+    }
+
+    .form-group input,
+    .login-button {
+        width: 90%; /* Ocupar todo el ancho disponible en móvil */
+    }
+    
+    .login-form h1 {
+        font-size: 1.5rem;
+    }
+}
+

@@ -4,13 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/encabezado.css">
-    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/index.css">
     <title>Inicio</title>
 </head>
 <body>
     <div id="header-container"></div>
     
-    <img class="imagen-responsive" src="../images/logo_inicio.PNG" alt="Logo inicio">
+    <main class="login-container">
+        <div class="login-logo">
+            <img class="imagen-responsive" src="../images/logo_inicio.PNG" alt="Logo inicio">
+        </div>
+        
+        <form class="login-form">
+            <h1>Iniciar Sesión</h1>
+            
+            <div class="form-group">
+                <label for="usuario">Usuario</label>
+                <input type="text" id="usuario" name="usuario" required placeholder="Ingrese su usuario">
+            </div>
+            
+            <div class="form-group">
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" name="contrasena" required placeholder="Ingrese su contraseña">
+            </div>
+            
+            <button type="submit" class="login-button">Ingresar</button>
+            
+            <div class="login-links">
+                <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+        </form>
+    </main>
 
     <script src="./js/header.js"></script>
 </body>
