@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="../css/general.css">
     <title>Calendario Cultural</title>
 </head>
+
 <body class="orange">
     <header class="black">
         <div class="logo">
@@ -29,32 +31,77 @@
             </ul>
         </nav>
     </header>
-    
+
     <img class="imagen-responsive" src="../images/5/propuesta-web-ade_03.jpg" alt="Calendario cultural">
 
     <main class="calendario-container">
         <h1>Calendario Cultural</h1>
-        
+
         <div class="controles-calendario">
             <button id="btn-anterior" class="boton-calendario">‹</button>
-            
+
             <button id="btn-siguiente" class="boton-calendario">›</button>
         </div>
-        
+
+
+
+        <div class="gestion-eventos">
+            <button id="btn-agregar-evento" class="boton-evento">+ Agregar Evento</button>
+        </div>
+
+        <!-- Modal para gestión de eventos (nuevo) -->
+        <div id="modal-gestion-evento" class="modal">
+            <div class="modal-contenido">
+                <span class="cerrar-modal">&times;</span>
+                <h3 id="modal-gestion-titulo">Gestionar Evento</h3>
+                <form id="form-evento">
+                    <input type="hidden" id="evento-id">
+                    <div class="form-group">
+                        <label for="evento-titulo">Título:</label>
+                        <input type="text" id="evento-titulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="evento-fecha">Fecha:</label>
+                        <input type="date" id="evento-fecha" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="evento-descripcion">Descripción:</label>
+                        <textarea id="evento-descripcion" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="evento-imagen">URL de la imagen:</label>
+                        <input type="text" id="evento-imagen">
+                    </div>
+                    <div class="form-group">
+                        <label for="evento-lugar">Lugar:</label>
+                        <input type="text" id="evento-lugar" required>
+                    </div>
+                    <div class="acciones-formulario">
+                        <button type="submit" id="btn-guardar-evento" class="boton-evento">Guardar</button>
+                        <button type="button" id="btn-eliminar-evento" class="boton-evento eliminar">Eliminar</button>
+                        <button type="button" id="btn-cancelar-evento" class="boton-evento cancelar">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
         <div class="calendario-meses">
-        <!-- Mes Actual -->
-        <div class="mes-wrapper">
-            <h2 id="titulo-mes-actual" class="titulo-mes"></h2>
-            <div class="mes-container" id="mes-actual"></div>
+            <!-- Mes Actual -->
+            <div class="mes-wrapper">
+                <h2 id="titulo-mes-actual" class="titulo-mes"></h2>
+                <div class="mes-container" id="mes-actual"></div>
+            </div>
+
+            <!-- Mes Siguiente -->
+            <div class="mes-wrapper">
+                <h2 id="titulo-mes-siguiente" class="titulo-mes"></h2>
+                <div class="mes-container" id="mes-siguiente"></div>
+            </div>
         </div>
-        
-        <!-- Mes Siguiente -->
-        <div class="mes-wrapper">
-            <h2 id="titulo-mes-siguiente" class="titulo-mes"></h2>
-            <div class="mes-container" id="mes-siguiente"></div>
-        </div>
-    </div>
-        
+
         <div id="modal-evento" class="modal">
             <div class="modal-contenido">
                 <span class="cerrar-modal">&times;</span>
@@ -69,4 +116,5 @@
 
     <script src="../js/calendario_cultural.js"></script>
 </body>
+
 </html>

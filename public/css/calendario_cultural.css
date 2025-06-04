@@ -276,3 +276,64 @@ h1 {
         }
     }
 }
+
+/* Estilos para gestión de eventos */
+.gestion-eventos {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.boton-evento {
+    background-color: var(--orange-dark);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 0 5px;
+}
+
+.boton-evento:hover {
+    background-color: var(--brown-light);
+}
+
+.boton-evento.eliminar {
+    background-color: var(--red);
+}
+
+.boton-evento.cancelar {
+    background-color: var(--gray);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--orange-yellow);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.form-group textarea {
+    min-height: 100px;
+}
+
+.acciones-formulario {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+

@@ -16,8 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             descripcion: "Exposición de artistas locales emergentes en el centro cultural municipal.",
             imagen: "../images/eventos/arte-contemporaneo.jpg",
             lugar: "Centro Cultural"
-        },
-        // Se pueden agregar más eventos aquí
+        }
     ];
 
     // Elementos del DOM
@@ -29,11 +28,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnSiguiente = document.getElementById('btn-siguiente');
     const modal = document.getElementById('modal-evento');
     const spanCerrar = document.getElementsByClassName('cerrar-modal')[0];
+    const btnAgregarEvento = document.getElementById('btn-agregar-evento');
+    const modalGestionEvento = document.getElementById('modal-gestion-evento');
+    const formEvento = document.getElementById('form-evento');
+    const btnEliminarEvento = document.getElementById('btn-eliminar-evento');
+    const btnCancelarEvento = document.getElementById('btn-cancelar-evento');
+    const spanCerrarGestion = modalGestionEvento.querySelector('.cerrar-modal');
 
     // Variables de estado
     let fechaActual = new Date();
     let mesActual = fechaActual.getMonth();
     let añoActual = fechaActual.getFullYear();
+    let eventoEditando = null;
 
     // Nombres de meses
     const nombresMeses = [
@@ -158,11 +164,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Mostrar eventos en modal
-    function mostrarEventos(eventos) {
-        if (eventos.length === 0) return;
+    function mostrarEventos(eventosMostrar) {
+        if (eventosMostrar.length === 0) return;
         
-        // De momento, se muestra solo el primer evento si hay varios
-        const evento = eventos[0]; //indice 0 = primer evento
+        const evento = eventosMostrar[0];
         
         document.getElementById('modal-titulo').textContent = evento.titulo;
         document.getElementById('modal-fecha').textContent = 
@@ -171,7 +176,134 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('modal-imagen').src = evento.imagen;
         document.getElementById('modal-lugar').textContent = `Lugar: ${evento.lugar}`;
         
+        // Limpiar acciones anteriores si existen
+        const accionesAnteriores = document.querySelector('.modal-contenido .acciones-evento');
+        if (accionesAnteriores) {
+            accionesAnteriores.remove();
+        }
+        
+        // Agregar botón de edición
+        const acciones = document.createElement('div');
+        acciones.className = 'acciones-evento';
+        acciones.style.marginTop = '20px';
+        acciones.style.textAlign = 'right';
+        
+        const btnEditar = document.createElement('button');
+        btnEditar.textContent = 'Editar Evento';
+        btnEditar.className = 'boton-evento';
+        btnEditar.addEventListener('click', function() {
+            modal.style.display = 'none';
+            abrirModalGestion(evento);
+        });
+        
+        acciones.appendChild(btnEditar);
+        document.querySelector('.modal-contenido').appendChild(acciones);
+        
         modal.style.display = 'block';
+    }
+
+    // Funciones para gestión de eventos
+    function abrirModalGestion(evento = null) {
+        eventoEditando = evento;
+        
+        if (evento) {
+            // Modo edición
+            document.getElementById('modal-gestion-titulo').textContent = 'Editar Evento';
+            document.getElementById('evento-id').value = evento.id;
+            document.getElementById('evento-titulo').value = evento.titulo;
+            document.getElementById('evento-fecha').value = formatDateForInput(evento.fecha);
+            document.getElementById('evento-descripcion').value = evento.descripcion;
+            document.getElementById('evento-imagen').value = evento.imagen;
+            document.getElementById('evento-lugar').value = evento.lugar;
+            
+            btnEliminarEvento.style.display = 'inline-block';
+        } else {
+            // Modo nuevo
+            document.getElementById('modal-gestion-titulo').textContent = 'Agregar Evento';
+            formEvento.reset();
+            document.getElementById('evento-id').value = '';
+            
+            // Establecer fecha por defecto (hoy)
+            const hoy = new Date();
+            document.getElementById('evento-fecha').value = formatDateForInput(hoy);
+            
+            btnEliminarEvento.style.display = 'none';
+        }
+        
+        modalGestionEvento.style.display = 'block';
+    }
+
+    function formatDateForInput(date) {
+        const d = new Date(date);
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+
+    function guardarEvento(e) {
+        e.preventDefault();
+        
+        const id = document.getElementById('evento-id').value;
+        const titulo = document.getElementById('evento-titulo').value;
+        const fechaStr = document.getElementById('evento-fecha').value;
+        const descripcion = document.getElementById('evento-descripcion').value;
+        const imagen = document.getElementById('evento-imagen').value;
+        const lugar = document.getElementById('evento-lugar').value;
+        
+        
+        const [year, month, day] = fechaStr.split('-');
+        const fecha = new Date(year, month - 1, day);
+        
+        const nuevoEvento = {
+            id: id || generarNuevoId(),
+            titulo,
+            fecha,
+            descripcion,
+            imagen: imagen || '../images/eventos/default.jpg',
+            lugar
+        };
+        
+        if (eventoEditando) {
+            // Actualizar evento existente
+            const index = eventos.findIndex(e => e.id == eventoEditando.id);
+            if (index !== -1) {
+                eventos[index] = nuevoEvento;
+            }
+        } else {
+            // Agregar nuevo evento
+            eventos.push(nuevoEvento);
+        }
+        
+        actualizarCalendario();
+        cerrarModalGestion();
+    }
+
+    function generarNuevoId() {
+        return eventos.length > 0 ? Math.max(...eventos.map(e => e.id)) + 1 : 1;
+    }
+
+    function eliminarEvento() {
+        if (!eventoEditando) return;
+        
+        const confirmar = confirm('¿Estás seguro de que deseas eliminar este evento?');
+        if (confirmar) {
+            const index = eventos.findIndex(e => e.id == eventoEditando.id);
+            if (index !== -1) {
+                eventos.splice(index, 1);
+                actualizarCalendario();
+                cerrarModalGestion();
+            }
+        }
+    }
+
+    function cerrarModalGestion() {
+        modalGestionEvento.style.display = 'none';
+        eventoEditando = null;
     }
 
     // Event Listeners
@@ -197,12 +329,28 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.style.display = 'none';
     });
     
+    btnAgregarEvento.addEventListener('click', function() {
+        abrirModalGestion();
+    });
+
+    formEvento.addEventListener('submit', guardarEvento);
+
+    btnEliminarEvento.addEventListener('click', eliminarEvento);
+
+    btnCancelarEvento.addEventListener('click', cerrarModalGestion);
+
+    spanCerrarGestion.addEventListener('click', cerrarModalGestion);
+
     window.addEventListener('click', function(event) {
         if (event.target === modal) {
             modal.style.display = 'none';
+        }
+        if (event.target === modalGestionEvento) {
+            cerrarModalGestion();
         }
     });
 
     // Inicializar
     inicializarCalendario();
 });
+
