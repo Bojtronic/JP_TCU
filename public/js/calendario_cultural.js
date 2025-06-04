@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Datos de eventos antes de conectar a la base de datos
-    const eventos = [
+    // Datos de eventos (podría reemplazarse con una conexión a base de datos)
+    let eventos = JSON.parse(localStorage.getItem('eventosCulturales')) || [
         {
             id: 1,
             titulo: "Festival de Música Tradicional",
@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let mesActual = fechaActual.getMonth();
     let añoActual = fechaActual.getFullYear();
     let eventoEditando = null;
+    let eventoSeleccionado = null;
 
     // Nombres de meses
     const nombresMeses = [
@@ -74,6 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Generar calendarios
         generarCalendario(mesActual, añoActual, mesActualElement);
         generarCalendario(mesSiguiente, añoSiguiente, mesSiguienteElement);
+        
+        // Guardar en localStorage
+        guardarEventosEnLocalStorage();
     }
 
     // Generar calendario para un mes específico
@@ -126,19 +130,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Celda con día del mes
                     td.textContent = fecha;
                     
-                    // Crear fecha completa para comparación
+                    // Crear fecha completa para comparación (sin horas/minutos/segundos)
                     const fechaCelda = new Date(año, mes, fecha);
+                    fechaCelda.setHours(0, 0, 0, 0);
                     
                     // Marcar día actual
                     const hoy = new Date();
-                    if (fechaCelda.toDateString() === hoy.toDateString()) {
+                    hoy.setHours(0, 0, 0, 0);
+                    if (fechaCelda.getTime() === hoy.getTime()) {
                         td.classList.add('dia-actual');
                     }
                     
                     // Verificar si hay eventos en este día
-                    const eventosDia = eventos.filter(evento => 
-                        evento.fecha.toDateString() === fechaCelda.toDateString()
-                    );
+                    const eventosDia = eventos.filter(evento => {
+                        const fechaEvento = new Date(evento.fecha);
+                        fechaEvento.setHours(0, 0, 0, 0);
+                        return fechaEvento.getTime() === fechaCelda.getTime();
+                    });
                     
                     if (eventosDia.length > 0) {
                         td.classList.add('dia-con-evento');
@@ -167,14 +175,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function mostrarEventos(eventosMostrar) {
         if (eventosMostrar.length === 0) return;
         
-        const evento = eventosMostrar[0];
+        eventoSeleccionado = eventosMostrar[0];
         
-        document.getElementById('modal-titulo').textContent = evento.titulo;
+        document.getElementById('modal-titulo').textContent = eventoSeleccionado.titulo;
         document.getElementById('modal-fecha').textContent = 
-            `Fecha: ${evento.fecha.getDate()}/${evento.fecha.getMonth() + 1}/${evento.fecha.getFullYear()}`;
-        document.getElementById('modal-descripcion').textContent = evento.descripcion;
-        document.getElementById('modal-imagen').src = evento.imagen;
-        document.getElementById('modal-lugar').textContent = `Lugar: ${evento.lugar}`;
+            `Fecha: ${formatDateForDisplay(eventoSeleccionado.fecha)}`;
+        document.getElementById('modal-descripcion').textContent = eventoSeleccionado.descripcion;
+        document.getElementById('modal-imagen').src = eventoSeleccionado.imagen;
+        document.getElementById('modal-lugar').textContent = `Lugar: ${eventoSeleccionado.lugar}`;
         
         // Limpiar acciones anteriores si existen
         const accionesAnteriores = document.querySelector('.modal-contenido .acciones-evento');
@@ -182,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
             accionesAnteriores.remove();
         }
         
-        // Agregar botón de edición
+        // Agregar botones de edición y eliminación
         const acciones = document.createElement('div');
         acciones.className = 'acciones-evento';
         acciones.style.marginTop = '20px';
@@ -193,10 +201,21 @@ document.addEventListener('DOMContentLoaded', function() {
         btnEditar.className = 'boton-evento';
         btnEditar.addEventListener('click', function() {
             modal.style.display = 'none';
-            abrirModalGestion(evento);
+            abrirModalGestion(eventoSeleccionado);
+        });
+        
+        const btnEliminar = document.createElement('button');
+        btnEliminar.textContent = 'Eliminar Evento';
+        btnEliminar.className = 'boton-evento eliminar';
+        btnEliminar.addEventListener('click', function() {
+            if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
+                eliminarEvento(eventoSeleccionado.id);
+                modal.style.display = 'none';
+            }
         });
         
         acciones.appendChild(btnEditar);
+        acciones.appendChild(btnEliminar);
         document.querySelector('.modal-contenido').appendChild(acciones);
         
         modal.style.display = 'block';
@@ -235,14 +254,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatDateForInput(date) {
         const d = new Date(date);
-        let month = '' + (d.getMonth() + 1);
-        let day = '' + d.getDate();
         const year = d.getFullYear();
+        const month = (d.getMonth() + 1).toString().padStart(2, '0');
+        const day = d.getDate().toString().padStart(2, '0');
+        
+        return `${year}-${month}-${day}`;
+    }
 
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
-
-        return [year, month, day].join('-');
+    function formatDateForDisplay(date) {
+        const d = new Date(date);
+        const day = d.getDate();
+        const month = d.getMonth() + 1;
+        const year = d.getFullYear();
+        
+        return `${day}/${month}/${year}`;
     }
 
     function guardarEvento(e) {
@@ -255,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const imagen = document.getElementById('evento-imagen').value;
         const lugar = document.getElementById('evento-lugar').value;
         
-        
+        // Crear fecha correctamente (sin problemas de zona horaria)
         const [year, month, day] = fechaStr.split('-');
         const fecha = new Date(year, month - 1, day);
         
@@ -283,22 +308,17 @@ document.addEventListener('DOMContentLoaded', function() {
         cerrarModalGestion();
     }
 
+    function eliminarEvento(id) {
+        eventos = eventos.filter(evento => evento.id != id);
+        actualizarCalendario();
+    }
+
     function generarNuevoId() {
         return eventos.length > 0 ? Math.max(...eventos.map(e => e.id)) + 1 : 1;
     }
 
-    function eliminarEvento() {
-        if (!eventoEditando) return;
-        
-        const confirmar = confirm('¿Estás seguro de que deseas eliminar este evento?');
-        if (confirmar) {
-            const index = eventos.findIndex(e => e.id == eventoEditando.id);
-            if (index !== -1) {
-                eventos.splice(index, 1);
-                actualizarCalendario();
-                cerrarModalGestion();
-            }
-        }
+    function guardarEventosEnLocalStorage() {
+        localStorage.setItem('eventosCulturales', JSON.stringify(eventos));
     }
 
     function cerrarModalGestion() {
@@ -335,7 +355,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     formEvento.addEventListener('submit', guardarEvento);
 
-    btnEliminarEvento.addEventListener('click', eliminarEvento);
+    btnEliminarEvento.addEventListener('click', function() {
+        if (eventoEditando && confirm('¿Estás seguro de que deseas eliminar este evento?')) {
+            eliminarEvento(eventoEditando.id);
+            cerrarModalGestion();
+        }
+    });
 
     btnCancelarEvento.addEventListener('click', cerrarModalGestion);
 
@@ -353,4 +378,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar
     inicializarCalendario();
 });
-
