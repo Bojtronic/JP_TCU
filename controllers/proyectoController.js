@@ -11,50 +11,78 @@ const proyectoController = {
     }
   },
 
-  // Crear un nuevo proyecto
-  create: async (req, res) => {
+  // Obtener un proyecto por ID
+  getById: async (req, res) => {
     try {
-      const { titulo, descripcion, tipo } = req.body;
+      const { id } = req.params;
+      const proyecto = await ProyectoModel.getById(id);
       
-      // El archivo se maneja diferente porque viene como multipart/form-data
-      const archivo = req.file ? `/uploads/${req.file.filename}` : null;
-      
-      if (!titulo || !descripcion || !tipo || !archivo) {
-        return res.status(400).json({ error: 'Faltan campos obligatorios' });
+      if (!proyecto) {
+        return res.status(404).json({ error: 'Proyecto no encontrado' });
       }
-
-      const nuevoProyecto = await ProyectoModel.create({
-        titulo,
-        descripcion,
-        tipo,
-        archivo
-      });
-
-      res.status(201).json(nuevoProyecto);
+      
+      res.json(proyecto);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   },
 
-  // Actualizar un proyecto
+  // Crear un nuevo proyecto (con archivo binario)
+  create: async (req, res) => {
+    try {
+      const { titulo, descripcion, tipo } = req.body;
+      const archivo = req.file.buffer; // Acceso al Buffer del archivo
+      const mime_type = req.file.mimetype;
+
+      // Validación básica
+      if (!titulo || !descripcion || !tipo || !archivo) {
+        return res.status(400).json({ error: 'Faltan campos obligatorios' });
+      }
+
+      await ProyectoModel.create({
+        titulo,
+        descripcion,
+        tipo,
+        archivo,
+        mime_type
+      });
+
+      res.status(201).json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  // Actualizar un proyecto (con archivo binario)
   update: async (req, res) => {
     try {
       const { id } = req.params;
       const { titulo, descripcion, tipo } = req.body;
-      const archivo = req.file ? `/uploads/${req.file.filename}` : null;
+      
+      // Manejo del archivo (usar el nuevo si se subió, mantener el actual si no)
+      let archivo, mime_type;
+      if (req.file) {
+        archivo = req.file.buffer;
+        mime_type = req.file.mimetype;
+      } else {
+        const proyectoActual = await ProyectoModel.getById(id);
+        archivo = proyectoActual.archivo;
+        mime_type = proyectoActual.mime_type;
+      }
 
-      // Obtener el proyecto actual para mantener el archivo si no se sube uno nuevo
-      const proyectoActual = await ProyectoModel.getById(id);
-      const archivoFinal = archivo || proyectoActual.archivo;
-
-      const proyectoActualizado = await ProyectoModel.update(id, {
+      const actualizado = await ProyectoModel.update(id, {
         titulo,
         descripcion,
         tipo,
-        archivo: archivoFinal
+        archivo,
+        mime_type
       });
 
-      res.json(proyectoActualizado);
+      if (!actualizado) {
+        return res.status(404).json({ error: 'Proyecto no encontrado' });
+      }
+
+      res.json({ success: true });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -64,7 +92,12 @@ const proyectoController = {
   delete: async (req, res) => {
     try {
       const { id } = req.params;
-      await ProyectoModel.delete(id);
+      const eliminado = await ProyectoModel.delete(id);
+      
+      if (!eliminado) {
+        return res.status(404).json({ error: 'Proyecto no encontrado' });
+      }
+      
       res.json({ success: true });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -73,4 +106,3 @@ const proyectoController = {
 };
 
 module.exports = proyectoController;
-

@@ -1,70 +1,63 @@
 const db = require('../database/db');
 
 class ProyectoModel {
-  // Obtener todos los proyectos
+  // Obtener todos los proyectos (completos)
   static async getAll() {
-    // PostgreSQL:
-    const { rows } = await db.query('SELECT * FROM proyectos ORDER BY id DESC');
+    const { rows } = await db.query(`
+      SELECT id, titulo, descripcion, tipo, archivo, mime_type
+      FROM proyectos 
+    `);
     return rows;
-    
-    // MySQL:
-    // const [rows] = await db.query('SELECT * FROM proyectos ORDER BY id DESC');
-    // return rows;
   }
 
-  // Obtener un proyecto por ID
+  // Obtener un proyecto por id 
   static async getById(id) {
-    // PostgreSQL:
-    const { rows } = await db.query('SELECT * FROM proyectos WHERE id = $1', [id]);
+    const { rows } = await db.query(`
+      SELECT id, titulo, descripcion, tipo, archivo, mime_type
+      FROM proyectos 
+      WHERE id = $1`, [id]);
     return rows[0];
-    
-    // MySQL:
-    // const [rows] = await db.query('SELECT * FROM proyectos WHERE id = ?', [id]);
-    // return rows[0];
   }
 
-  // Crear un nuevo proyecto
-  static async create({ titulo, descripcion, tipo, archivo }) {
-    // PostgreSQL:
-    const { rows } = await db.query(
-      'INSERT INTO proyectos (titulo, descripcion, tipo, archivo) VALUES ($1, $2, $3, $4) RETURNING *',
-      [titulo, descripcion, tipo, archivo]
+  // Crear un nuevo proyecto con archivo binario
+  static async create({ titulo, descripcion, tipo, archivo, mime_type }) {
+    if (!Buffer.isBuffer(archivo)) {
+      throw new Error('El archivo debe ser un Buffer válido');
+    }
+
+    await db.query(
+      `INSERT INTO proyectos 
+       (titulo, descripcion, tipo, archivo, mime_type) 
+       VALUES ($1, $2, $3, $4, $5)`, 
+      [titulo, descripcion, tipo, archivo, mime_type]
     );
-    return rows[0];
-    
-    // MySQL:
-    // const [result] = await db.query(
-    //   'INSERT INTO proyectos (titulo, descripcion, tipo, archivo) VALUES (?, ?, ?, ?)',
-    //   [titulo, descripcion, tipo, archivo]
-    // );
-    // return this.getById(result.insertId);
+    return true; // Simple confirmación
   }
 
-  // Actualizar un proyecto
-  static async update(id, { titulo, descripcion, tipo, archivo }) {
-    // PostgreSQL:
-    const { rows } = await db.query(
-      'UPDATE proyectos SET titulo = $1, descripcion = $2, tipo = $3, archivo = $4 WHERE id = $5 RETURNING *',
-      [titulo, descripcion, tipo, archivo, id]
+  // Actualizar TODOS los campos
+  static async update(id, { titulo, descripcion, tipo, archivo, mime_type }) {
+    if (!Buffer.isBuffer(archivo)) {
+      throw new Error('El archivo debe ser un Buffer válido');
+    }
+
+    const { rowCount } = await db.query(
+      `UPDATE proyectos 
+       SET titulo = $1, descripcion = $2, tipo = $3, 
+           archivo = $4, mime_type = $5
+       WHERE id = $6`, 
+      [titulo, descripcion, tipo, archivo, mime_type, id]
     );
-    return rows[0];
-    
-    // MySQL:
-    // await db.query(
-    //   'UPDATE proyectos SET titulo = ?, descripcion = ?, tipo = ?, archivo = ? WHERE id = ?',
-    //   [titulo, descripcion, tipo, archivo, id]
-    // );
-    // return this.getById(id);
+    return rowCount > 0; 
   }
 
-  // Eliminar un proyecto
+  // Eliminar un proyecto 
   static async delete(id) {
-    // PostgreSQL/MySQL:
-    await db.query('DELETE FROM proyectos WHERE id = $1', [id]);
-    // MySQL usar '?' en lugar de '$1'
-    return true;
+    const { rowCount } = await db.query(
+      'DELETE FROM proyectos WHERE id = $1',
+      [id]
+    );
+    return rowCount > 0;
   }
 }
 
 module.exports = ProyectoModel;
-
