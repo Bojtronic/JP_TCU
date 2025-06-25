@@ -6,3 +6,11 @@ CREATE TABLE proyectos (
   archivo BYTEA NOT NULL, 
   mime_type VARCHAR(30) NOT NULL
 );
+
+
+CREATE TABLE usuarios (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL,
+  correo VARCHAR(50) UNIQUE NOT NULL,
+  clave VARCHAR(20) NOT NULL
+);
