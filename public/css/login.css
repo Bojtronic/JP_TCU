@@ -34,7 +34,46 @@
     background-color: #c82333;
 }
 
-/* Opcional: animación para el cambio de estado */
-.login-form, .logged-in-section {
+
+.logged-in-section {
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.login-form{
     transition: opacity 0.3s ease;
 }
+
+/* Estilos para botones de autenticación */
+.auth-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    margin-left: 10px;
+}
+
+.login-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.login-btn:hover {
+    background-color: #218838;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+

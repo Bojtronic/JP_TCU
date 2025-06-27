@@ -1,3 +1,4 @@
+// login.js - Para la página de inicio de sesión
 document.addEventListener('DOMContentLoaded', function() {
     const loginContainer = document.querySelector('.login-container');
     const loginForm = document.querySelector('.login-form');
@@ -6,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const loggedInSection = document.createElement('div');
     loggedInSection.className = 'logged-in-section';
     loggedInSection.style.display = 'none';
-    loggedInSection.style.textAlign = 'center';
     
     const welcomeMessage = document.createElement('h2');
     welcomeMessage.className = 'welcome-message';
@@ -14,19 +14,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutButton = document.createElement('button');
     logoutButton.className = 'logout-button';
     logoutButton.textContent = 'Cerrar Sesión';
-    logoutButton.style.marginTop = '20px';
     
     loggedInSection.appendChild(welcomeMessage);
     loggedInSection.appendChild(logoutButton);
     loginContainer.appendChild(loggedInSection);
 
-    // Datos de usuarios hardcodeados
+    // Usuarios hardcodeados
     const USUARIOS = [
         { usuario: 'admin', contrasena: 'admin123', nombre: 'Administrador' },
         { usuario: 'invitado', contrasena: 'invitado123', nombre: 'Usuario Invitado' }
     ];
 
-    // Manejar el envío del formulario
+    // Manejar login
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -38,41 +37,55 @@ document.addEventListener('DOMContentLoaded', function() {
         );
 
         if (usuarioValido) {
-            // Mostrar sección de usuario logueado
-            welcomeMessage.textContent = `Usuario logueado: ${usuarioValido.nombre}`;
-            loginForm.style.display = 'none';
-            loggedInSection.style.display = 'block';
-            
-            // Guardar estado de sesión
-            localStorage.setItem('auth', JSON.stringify({
-                isLoggedIn: true,
-                username: usuarioValido.usuario,
-                name: usuarioValido.nombre
-            }));
+            handleSuccessfulLogin(usuarioValido);
         } else {
-            // Mostrar mensaje de error
-            alert('Usuario o contraseña incorrectos');
-            document.getElementById('contrasena').value = '';
+            showLoginError();
         }
     });
 
-    // Manejar cierre de sesión
+    // Manejar logout
     logoutButton.addEventListener('click', function() {
+        handleLogout();
+    });
+
+    // Verificar sesión al cargar
+    checkAuthStatus();
+
+    // Funciones auxiliares
+    function handleSuccessfulLogin(user) {
+        welcomeMessage.textContent = `Usuario logueado: ${user.nombre}`;
+        loginForm.style.display = 'none';
+        loggedInSection.style.display = 'block';
+        
+        localStorage.setItem('auth', JSON.stringify({
+            isLoggedIn: true,
+            username: user.usuario,
+            name: user.nombre
+        }));
+    }
+
+    function showLoginError() {
+        alert('Usuario o contraseña incorrectos');
+        document.getElementById('contrasena').value = '';
+        document.getElementById('usuario').focus();
+    }
+
+    function handleLogout() {
         localStorage.removeItem('auth');
         loginForm.style.display = 'block';
         loggedInSection.style.display = 'none';
         document.getElementById('usuario').value = '';
         document.getElementById('contrasena').value = '';
-    });
+    }
 
-    // Verificar sesión existente al cargar la página
-    const auth = JSON.parse(localStorage.getItem('auth'));
-    if (auth && auth.isLoggedIn) {
-        const usuarioValido = USUARIOS.find(u => u.usuario === auth.username);
-        if (usuarioValido) {
-            welcomeMessage.textContent = `Usuario logueado: ${usuarioValido.nombre}`;
-            loginForm.style.display = 'none';
-            loggedInSection.style.display = 'block';
+    function checkAuthStatus() {
+        const auth = JSON.parse(localStorage.getItem('auth'));
+        if (auth && auth.isLoggedIn) {
+            const user = USUARIOS.find(u => u.usuario === auth.username);
+            if (user) {
+                handleSuccessfulLogin(user);
+            }
         }
     }
 });
+
