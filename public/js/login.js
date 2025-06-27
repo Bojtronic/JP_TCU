@@ -1,5 +1,6 @@
-// login.js - Para la página de inicio de sesión
 document.addEventListener('DOMContentLoaded', function() {
+    localStorage.removeItem('auth');
+    
     const loginContainer = document.querySelector('.login-container');
     const loginForm = document.querySelector('.login-form');
     
@@ -19,27 +20,34 @@ document.addEventListener('DOMContentLoaded', function() {
     loggedInSection.appendChild(logoutButton);
     loginContainer.appendChild(loggedInSection);
 
-    // Usuarios hardcodeados
-    const USUARIOS = [
-        { usuario: 'admin', contrasena: 'admin123', nombre: 'Administrador' },
-        { usuario: 'invitado', contrasena: 'invitado123', nombre: 'Usuario Invitado' }
-    ];
-
     // Manejar login
-    loginForm.addEventListener('submit', function(e) {
+    loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        const usuario = document.getElementById('usuario').value.trim();
-        const contrasena = document.getElementById('contrasena').value;
+        const correo = document.getElementById('correo').value.trim();
+        const clave = document.getElementById('contrasena').value;
         
-        const usuarioValido = USUARIOS.find(u => 
-            u.usuario === usuario && u.contrasena === contrasena
-        );
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: correo,
+                    password: clave
+                })
+            });
 
-        if (usuarioValido) {
-            handleSuccessfulLogin(usuarioValido);
-        } else {
-            showLoginError();
+            const data = await response.json();
+
+            if (response.ok) {
+                handleSuccessfulLogin(data.user);
+            } else {
+                showLoginError(data.error || 'Credenciales incorrectas');
+            }
+        } catch (error) {
+            showLoginError('Error de conexión con el servidor');
         }
     });
 
@@ -49,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Verificar sesión al cargar
-    checkAuthStatus();
+    //checkAuthStatus();
 
     // Funciones auxiliares
     function handleSuccessfulLogin(user) {
@@ -59,33 +67,46 @@ document.addEventListener('DOMContentLoaded', function() {
         
         localStorage.setItem('auth', JSON.stringify({
             isLoggedIn: true,
-            username: user.usuario,
-            name: user.nombre
+            username: user.email,
+            name: user.nombre,
+            id: user.id
         }));
+        
+        // Redirigir o actualizar UI según necesidad
+        // window.location.href = '/dashboard.html';
     }
 
-    function showLoginError() {
-        alert('Usuario o contraseña incorrectos');
+    function showLoginError(message) {
+        alert(message);
         document.getElementById('contrasena').value = '';
-        document.getElementById('usuario').focus();
+        document.getElementById('correo').focus();
     }
 
     function handleLogout() {
         localStorage.removeItem('auth');
         loginForm.style.display = 'block';
         loggedInSection.style.display = 'none';
-        document.getElementById('usuario').value = '';
+        document.getElementById('correo').value = '';
         document.getElementById('contrasena').value = '';
+        
+        // Opcional: Hacer logout también en el servidor
+        //fetch('/api/logout', { method: 'POST' });
     }
 
     function checkAuthStatus() {
         const auth = JSON.parse(localStorage.getItem('auth'));
         if (auth && auth.isLoggedIn) {
-            const user = USUARIOS.find(u => u.usuario === auth.username);
-            if (user) {
-                handleSuccessfulLogin(user);
-            }
+            // Verificar con el servidor si la sesión sigue activa
+            fetch(`/api/usuarios/${auth.id}`)
+                .then(response => response.json())
+                .then(user => {
+                    if (user) {
+                        handleSuccessfulLogin(user);
+                    }
+                })
+                .catch(() => {
+                    localStorage.removeItem('auth');
+                });
         }
     }
 });
-

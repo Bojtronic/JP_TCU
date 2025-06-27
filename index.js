@@ -2,8 +2,9 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const proyectoRoutes = require('./routes/proyectoRoutes');
 const path = require('path');
+const loginRoutes = require('./routes/loginRoutes');
+const proyectoRoutes = require('./routes/proyectoRoutes');
 
 const PORT = process.env.PORT || 4000;
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutas API
+app.use('/api/login', loginRoutes);
 app.use('/api/proyectos', proyectoRoutes);
 
 // Ruta principal

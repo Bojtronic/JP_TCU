@@ -14,3 +14,8 @@ CREATE TABLE usuarios (
   correo VARCHAR(50) UNIQUE NOT NULL,
   clave VARCHAR(20) NOT NULL
 );
+
+-- Usuario administrador
+INSERT INTO usuarios (nombre, correo, clave)
+VALUES ('administrador', '
+ade.culturaspalmares@gmail.com', 'adecp');
