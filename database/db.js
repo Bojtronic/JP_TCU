@@ -1,10 +1,14 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'JP_TCU',
-  password: '12345',
+  //user: 'postgres',
+  user: 'jp_tcu_bd_user',   
+  //host: 'localhost',
+  host: 'dpg-d1fc55je5dus73fr5fpg-a',   // .oregon-postgres.render.com/jp_tcu_bd   
+  //database: 'JP_TCU',
+  database: 'jp_tcu_bd',
+  //password: '12345',
+  password: 'mmZr25WbHBMuDbROwYeWcMREL6Umv38A',
   port: 5432,
 });
 
