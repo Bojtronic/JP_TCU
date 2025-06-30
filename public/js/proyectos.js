@@ -61,26 +61,29 @@ async function renderizarProyectos() {
     const proyectos = await fetchData('/api/proyectos');
     
     if (proyectos.length === 0) {
-      contenedor.innerHTML = '<p class="sin-proyectos">No hay proyectos aún. Agrega uno para comenzar.</p>';
+      contenedor.innerHTML = '<p class="sin-proyectos">No hay proyectos aún.</p>';
       return;
     }
 
     contenedor.innerHTML = '';
     
     proyectos.forEach(proyecto => {
+      // Crear URL para el archivo binario
+      const blob = new Blob([new Uint8Array(proyecto.archivo.data)], { type: proyecto.mime_type });
+      const mediaUrl = URL.createObjectURL(blob);
+
       let mediaContent = '';
-      
       if (proyecto.tipo === 'imagen') {
         mediaContent = `
           <div class="contenedor-imagen">
-            <img src="${proyecto.archivo}" alt="${proyecto.titulo}">
+            <img src="${mediaUrl}" alt="${proyecto.titulo}">
           </div>
         `;
       } else if (proyecto.tipo === 'audio') {
         mediaContent = `
           <div class="reproductor-audio">
             <h4>${proyecto.titulo}</h4>
-            <audio id="audio-${proyecto.id}" src="${proyecto.archivo}"></audio>
+            <audio id="audio-${proyecto.id}" src="${mediaUrl}"></audio>
             <div class="controles-audio">
               <button class="boton-reproducir" onclick="toggleReproduccion(${proyecto.id})">▶</button>
               <div class="barra-progreso" onclick="saltarAudio(event, ${proyecto.id})">
@@ -117,7 +120,7 @@ async function renderizarProyectos() {
     });
   } catch (error) {
     contenedor.innerHTML = '<p class="error">Error al cargar los proyectos. Por favor, recarga la página.</p>';
-    console.error(error);
+    console.error('Error en renderizarProyectos:', error);
   }
 }
 
@@ -230,17 +233,21 @@ async function editarProyecto(id) {
     const proyecto = await fetchData(`/api/proyectos/${id}`);
     const contenedor = document.getElementById(`proyecto-${id}`);
 
+    // Convertir el archivo binario a URL
+    const blob = new Blob([new Uint8Array(proyecto.archivo.data)], { type: proyecto.mime_type });
+    const mediaUrl = URL.createObjectURL(blob);
+
     let mediaContent = '';
     if (proyecto.tipo === 'imagen') {
       mediaContent = `
         <div class="contenedor-imagen">
-          <img class="imagen-editable" src="${proyecto.archivo}" alt="${proyecto.titulo}">
+          <img class="imagen-editable" src="${mediaUrl}" alt="${proyecto.titulo}" style="max-width: 100%; max-height: 200px;">
           <input type="file" id="editar-archivo-${id}" accept="image/*" style="margin-top: 10px;">
         </div>
       `;
     } else {
       mediaContent = `
-        <audio controls src="${proyecto.archivo}"></audio>
+        <audio controls src="${mediaUrl}"></audio>
         <input type="file" id="editar-archivo-${id}" accept="audio/*" style="margin-top: 10px;">
       `;
     }
@@ -258,6 +265,13 @@ async function editarProyecto(id) {
         </div>
       </div>
     `;
+
+    // Limpiar la URL del objeto cuando se cierre la edición
+    const cancelarBtn = contenedor.querySelector('.boton-cancelar');
+    cancelarBtn.addEventListener('click', () => {
+      URL.revokeObjectURL(mediaUrl);
+    });
+
   } catch (error) {
     alert('Error al cargar el proyecto para editar: ' + error.message);
     console.error(error);
