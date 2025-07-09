@@ -347,3 +347,24 @@ img {
 .proyecto-container {
     animation: fadeIn 0.5s ease-out forwards;
 }
+
+
+/* Estilos para ocultar la sección cuando no hay usuario */
+#seccion-agregar-proyecto {
+    transition: all 0.3s ease;
+}
+
+#seccion-agregar-proyecto.hidden,
+#seccion-agregar-proyecto[style*="display: none"] {
+    display: none !important;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+#form-agregar-proyecto.hidden,
+#form-agregar-proyecto[style*="display: none"] {
+    display: none !important;
+}

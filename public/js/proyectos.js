@@ -51,11 +51,17 @@ async function uploadFile(url, formData) {
   }
 }
 
+function hayUsuarioLogueado() {
+  const authData = localStorage.getItem('auth');
+  return authData && JSON.parse(authData).isLoggedIn;
+}
 
 // Función para renderizar todos los proyectos
 async function renderizarProyectos() {
   const contenedor = document.getElementById('contenedor-proyectos');
   contenedor.innerHTML = '<p>Cargando proyectos...</p>';
+  
+  const usuarioAutenticado = hayUsuarioLogueado();
 
   try {
     const proyectos = await fetchData('/api/proyectos');
@@ -94,6 +100,14 @@ async function renderizarProyectos() {
           </div>
         `;
       }
+      
+      //Solo incluir botones si hay usuario logueado
+      const botonesEdicion = usuarioAutenticado ? `
+        <div class="acciones-proyecto">
+          <button class="boton boton-editar" onclick="editarProyecto(${proyecto.id})">Editar</button>
+          <button class="boton boton-eliminar" onclick="eliminarProyecto(${proyecto.id})">Eliminar</button>
+        </div>
+      ` : '';
 
       const proyectoElement = document.createElement('div');
       proyectoElement.className = 'proyecto-container';
@@ -105,10 +119,7 @@ async function renderizarProyectos() {
         <div class="proyecto-explicacion">
           <h3>${proyecto.titulo}</h3>
           <p>${proyecto.descripcion}</p>
-          <div class="acciones-proyecto">
-            <button class="boton boton-editar" onclick="editarProyecto(${proyecto.id})">Editar</button>
-            <button class="boton boton-eliminar" onclick="eliminarProyecto(${proyecto.id})">Eliminar</button>
-          </div>
+          ${botonesEdicion}
         </div>
       `;
 
@@ -375,15 +386,39 @@ function saltarAudio(event, id) {
 }
 
 // Inicializar la visualización al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
+// Inicializar la visualización al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+  // Verificar autenticación inmediatamente
+  const estaLogueado = hayUsuarioLogueado();
+  
+  // Obtener elementos
+  const seccionAgregar = document.getElementById('seccion-agregar-proyecto');
+  const formAgregar = document.getElementById('form-agregar-proyecto');
+  
+  // Controlar visibilidad
+  if (seccionAgregar) {
+    seccionAgregar.style.display = estaLogueado ? 'block' : 'none';
+    seccionAgregar.classList.toggle('hidden', !estaLogueado);
+  }
+  
+  if (formAgregar) {
+    formAgregar.style.display = estaLogueado ? 'block' : 'none';
+    formAgregar.classList.toggle('hidden', !estaLogueado);
+  }
+
+  // 3. Renderizar proyectos
   renderizarProyectos();
   
-  // Configurar el formulario para que se pueda enviar con Enter
-  document.getElementById('nueva-descripcion').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      agregarProyecto();
+  // 4. Configurar evento Enter solo si está logueado
+  if (estaLogueado) {
+    const descripcionInput = document.getElementById('nueva-descripcion');
+    if (descripcionInput) {
+      descripcionInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          agregarProyecto();
+        }
+      });
     }
-  });
+  }
 });
-
