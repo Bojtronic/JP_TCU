@@ -159,6 +159,7 @@ h1 {
     right: 20px;
     font-size: 28px;
     font-weight: bold;
+    z-index: 1001;
     cursor: pointer;
 }
 

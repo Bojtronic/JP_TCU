@@ -27,13 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnAnterior = document.getElementById('btn-anterior');
     const btnSiguiente = document.getElementById('btn-siguiente');
     const modal = document.getElementById('modal-evento');
-    const spanCerrar = document.getElementsByClassName('cerrar-modal')[0];
+    //const spanCerrar = document.getElementsByClassName('cerrar-modal')[0];
+    const spanCerrarModal = document.querySelector('#modal-evento .cerrar-modal');
     const btnAgregarEvento = document.getElementById('btn-agregar-evento');
     const modalGestionEvento = document.getElementById('modal-gestion-evento');
     const formEvento = document.getElementById('form-evento');
     const btnEliminarEvento = document.getElementById('btn-eliminar-evento');
     const btnCancelarEvento = document.getElementById('btn-cancelar-evento');
-    const spanCerrarGestion = modalGestionEvento.querySelector('.cerrar-modal');
+    //const spanCerrarGestion = modalGestionEvento.querySelector('.cerrar-modal');
+    const spanCerrarGestion = document.querySelector('#modal-gestion-evento .cerrar-modal');
 
     // Variables de estado
     let fechaActual = new Date();
@@ -345,7 +347,13 @@ document.addEventListener('DOMContentLoaded', function() {
         actualizarCalendario();
     });
     
+    /*
     spanCerrar.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+    */
+
+    spanCerrarModal.addEventListener('click', function() {
         modal.style.display = 'none';
     });
     
@@ -364,7 +372,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     btnCancelarEvento.addEventListener('click', cerrarModalGestion);
 
-    spanCerrarGestion.addEventListener('click', cerrarModalGestion);
+    //spanCerrarGestion.addEventListener('click', cerrarModalGestion);
+
+    spanCerrarGestion.addEventListener('click', function() {
+        modalGestionEvento.style.display = 'none';
+    });
 
     window.addEventListener('click', function(event) {
         if (event.target === modal) {
