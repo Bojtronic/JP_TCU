@@ -37,6 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
     //const spanCerrarGestion = modalGestionEvento.querySelector('.cerrar-modal');
     const spanCerrarGestion = document.querySelector('#modal-gestion-evento .cerrar-modal');
 
+    const btnEliminarEventos = document.getElementById('btn-eliminar-eventos');
+    const modalEliminarEventos = document.getElementById('modal-eliminar-eventos');
+    const listaEventos = document.getElementById('lista-eventos');
+    const btnCerrarEliminar = document.getElementById('btn-cerrar-eliminar');
+
+    const spanCerrarEliminarModal = document.querySelector('#modal-eliminar-eventos .cerrar-modal');
+    const modalEliminarEvento = document.getElementById('modal-eliminar-eventos');
+
     // Variables de estado
     let fechaActual = new Date();
     let mesActual = fechaActual.getMonth();
@@ -310,10 +318,19 @@ document.addEventListener('DOMContentLoaded', function() {
         cerrarModalGestion();
     }
 
+
     function eliminarEvento(id) {
-        eventos = eventos.filter(evento => evento.id != id);
+    if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
+        eventos = eventos.filter(evento => evento.id !== id);
+        guardarEventosEnLocalStorage();
         actualizarCalendario();
+        
+        // Si el modal de eventos está abierto, cerrarlo
+        if (modal.style.display === 'block') {
+            modal.style.display = 'none';
+        }
     }
+}
 
     function generarNuevoId() {
         return eventos.length > 0 ? Math.max(...eventos.map(e => e.id)) + 1 : 1;
@@ -370,6 +387,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    btnEliminarEventos.addEventListener('click', function() {
+        cargarListaEventos();
+        modalEliminarEventos.style.display = 'block';
+    });
+
     btnCancelarEvento.addEventListener('click', cerrarModalGestion);
 
     //spanCerrarGestion.addEventListener('click', cerrarModalGestion);
@@ -378,12 +400,69 @@ document.addEventListener('DOMContentLoaded', function() {
         modalGestionEvento.style.display = 'none';
     });
 
+    
+    spanCerrarEliminarModal.addEventListener('click', function() {
+        modalEliminarEvento.style.display = 'none';
+    });
+
+
     window.addEventListener('click', function(event) {
         if (event.target === modal) {
             modal.style.display = 'none';
         }
         if (event.target === modalGestionEvento) {
             cerrarModalGestion();
+        }
+    });
+
+
+
+    // Cargar lista de eventos en el modal
+    function cargarListaEventos() {
+        listaEventos.innerHTML = ''; // Limpiar lista
+        
+        if (eventos.length === 0) {
+            listaEventos.innerHTML = '<p>No hay eventos programados.</p>';
+            return;
+        }
+        
+        // Ordenar eventos por fecha
+        const eventosOrdenados = [...eventos].sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+        
+        eventosOrdenados.forEach(evento => {
+            const eventoItem = document.createElement('div');
+            eventoItem.className = 'evento-item';
+            
+            eventoItem.innerHTML = `
+                <div class="evento-info">
+                    <div class="evento-titulo">${evento.titulo}</div>
+                    <div class="evento-fecha">${formatDateForDisplay(evento.fecha)}</div>
+                </div>
+                <button class="btn-eliminar-item" data-id="${evento.id}">Eliminar</button>
+            `;
+            
+            listaEventos.appendChild(eventoItem);
+        });
+        
+        // Agregar event listeners a los botones de eliminar
+        document.querySelectorAll('.btn-eliminar-item').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = parseInt(this.getAttribute('data-id'));
+                eliminarEvento(id);
+                cargarListaEventos(); // Recargar la lista después de eliminar
+            });
+        });
+    }
+
+    // Cerrar modal de eliminar eventos
+    btnCerrarEliminar.addEventListener('click', function() {
+        modalEliminarEventos.style.display = 'none';
+    });
+
+    // También puedes cerrar haciendo clic fuera del modal
+    window.addEventListener('click', function(event) {
+        if (event.target === modalEliminarEventos) {
+            modalEliminarEventos.style.display = 'none';
         }
     });
 

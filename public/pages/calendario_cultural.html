@@ -53,6 +53,9 @@
 
         <div class="gestion-eventos">
             <button id="btn-agregar-evento" class="boton-evento">+ Agregar Evento</button>
+            <br>
+            <br>
+            <button id="btn-eliminar-eventos" class="boton-evento-eliminar">✗ Eliminar Eventos</button>
         </div>
 
         <!-- Modal para gestión de evento -->
@@ -88,6 +91,18 @@
                         <button type="button" id="btn-cancelar-evento" class="boton-evento cancelar">Cancelar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- Modal para eliminar eventos -->
+        <div id="modal-eliminar-eventos" class="modal">
+            <div class="modal-contenido">
+                <span class="cerrar-modal">&times;</span>
+                <h3>Eliminar Eventos</h3>
+                <div id="lista-eventos" class="lista-eventos">
+                    <!-- Los eventos se cargarán aquí dinámicamente -->
+                </div>
+                <button type="button" id="btn-cerrar-eliminar" class="boton-evento cancelar">Cerrar</button>
             </div>
         </div>
 

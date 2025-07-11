@@ -338,3 +338,61 @@ h1 {
     margin-top: 20px;
 }
 
+/* Estilos para la lista de eventos */
+.lista-eventos {
+    max-height: 400px;
+    overflow-y: auto;
+    margin: 20px 0;
+}
+
+.evento-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.evento-info {
+    flex: 1;
+}
+
+.evento-titulo {
+    font-weight: bold;
+    color: var(--orange-yellow);
+}
+
+.evento-fecha {
+    color: var(--lime-green);
+    font-size: 0.9em;
+}
+
+.btn-eliminar-item {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-eliminar-item:hover {
+    background-color: #c82333;
+}
+
+.boton-evento-eliminar {
+    background-color: var(--orange-dark);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 0 5px;
+}
+
+.boton-evento-eliminar:hover {
+    background-color: var(--brown-light);
+}
