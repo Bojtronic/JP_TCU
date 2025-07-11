@@ -29,7 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('modal-evento');
     //const spanCerrar = document.getElementsByClassName('cerrar-modal')[0];
     const spanCerrarModal = document.querySelector('#modal-evento .cerrar-modal');
+
     const btnAgregarEvento = document.getElementById('btn-agregar-evento');
+
     const modalGestionEvento = document.getElementById('modal-gestion-evento');
     const formEvento = document.getElementById('form-evento');
     const btnEliminarEvento = document.getElementById('btn-eliminar-evento');
@@ -38,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const spanCerrarGestion = document.querySelector('#modal-gestion-evento .cerrar-modal');
 
     const btnEliminarEventos = document.getElementById('btn-eliminar-eventos');
+
     const modalEliminarEventos = document.getElementById('modal-eliminar-eventos');
     const listaEventos = document.getElementById('lista-eventos');
     const btnCerrarEliminar = document.getElementById('btn-cerrar-eliminar');
@@ -57,6 +60,25 @@ document.addEventListener('DOMContentLoaded', function() {
         "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     ];
+
+    function verificarAutenticacion() {
+        const authData = localStorage.getItem('auth');
+        return authData && JSON.parse(authData).isLoggedIn;
+    }
+
+    const usuarioAutenticado = verificarAutenticacion();
+
+    if (usuarioAutenticado) {
+        btnAgregarEvento.style.display = 'inline-block';
+        btnEliminarEventos.style.display = 'inline-block';
+    } else {
+        btnAgregarEvento.style.display = 'none';
+        btnEliminarEventos.style.display = 'none';
+        
+    }
+
+    
+
 
     // Inicializar calendario
     function inicializarCalendario() {
@@ -299,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
             titulo,
             fecha,
             descripcion,
-            imagen: imagen || '../images/eventos/default.jpg',
+            imagen: imagen || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCOd5rjYXDf1FQUD5O5tMDTgZbDrTbmxIKA&s',
             lugar
         };
         
@@ -469,3 +491,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar
     inicializarCalendario();
 });
+
+function cerrarSesion() {
+    localStorage.removeItem('auth');
+    // Actualizar visibilidad de botones
+    document.getElementById('btn-agregar-evento').style.display = 'none';
+    document.getElementById('btn-eliminar-eventos').style.display = 'none';
+    // Redirigir o actualizar la página según sea necesario
+    window.location.reload();
+}
