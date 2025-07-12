@@ -257,6 +257,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function abrirModalGestion(evento = null) {
         eventoEditando = evento;
         
+        // Resetear el input de imagen
+        document.getElementById('evento-imagen').value = '';
+        document.getElementById('imagen-preview-container').style.display = 'none';
+        
         if (evento) {
             // Modo edición
             document.getElementById('modal-gestion-titulo').textContent = 'Editar Evento';
@@ -264,8 +268,13 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('evento-titulo').value = evento.titulo;
             document.getElementById('evento-fecha').value = formatDateForInput(evento.fecha);
             document.getElementById('evento-descripcion').value = evento.descripcion;
-            document.getElementById('evento-imagen').value = evento.imagen;
             document.getElementById('evento-lugar').value = evento.lugar;
+            
+            // Mostrar vista previa pequeña de la imagen existente
+            if (evento.imagen) {
+                document.getElementById('preview').src = evento.imagen;
+                document.getElementById('imagen-preview-container').style.display = 'block';
+            }
             
             btnEliminarEvento.style.display = 'inline-block';
         } else {
@@ -302,26 +311,58 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${day}/${month}/${year}`;
     }
 
-    function guardarEvento(e) {
+    document.getElementById('evento-imagen').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('preview').src = event.target.result;
+                document.getElementById('imagen-preview').style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    async function guardarEvento(e) {
         e.preventDefault();
         
         const id = document.getElementById('evento-id').value;
         const titulo = document.getElementById('evento-titulo').value;
         const fechaStr = document.getElementById('evento-fecha').value;
         const descripcion = document.getElementById('evento-descripcion').value;
-        const imagen = document.getElementById('evento-imagen').value;
         const lugar = document.getElementById('evento-lugar').value;
+        const imagenInput = document.getElementById('evento-imagen');
         
-        // Crear fecha correctamente (sin problemas de zona horaria)
+        // Validación básica
+        if (!titulo || !fechaStr || !descripcion || !lugar) {
+            alert('Por favor complete todos los campos requeridos');
+            return;
+        }
+        
+        // Crear fecha correctamente
         const [year, month, day] = fechaStr.split('-');
         const fecha = new Date(year, month - 1, day);
+        
+        // Manejo de la imagen
+        let imagenBase64 = '';
+        if (eventoEditando && !imagenInput.files[0]) {
+            // Si estamos editando y no se subió nueva imagen, mantener la existente
+            imagenBase64 = eventoEditando.imagen;
+        } else if (imagenInput.files[0]) {
+            // Convertir imagen a Base64
+            const file = imagenInput.files[0];
+            imagenBase64 = await convertToBase64(file);
+        } else {
+            // Imagen por defecto si no se proporciona ninguna
+            imagenBase64 = 'data:image/png;base64,...'; // Tu imagen por defecto en base64
+        }
         
         const nuevoEvento = {
             id: id || generarNuevoId(),
             titulo,
             fecha,
             descripcion,
-            imagen: imagen || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCOd5rjYXDf1FQUD5O5tMDTgZbDrTbmxIKA&s',
+            imagen: imagenBase64,
             lugar
         };
         
@@ -338,6 +379,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         actualizarCalendario();
         cerrarModalGestion();
+    }
+
+    // Función para convertir archivo a Base64
+    function convertToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
     }
 
 

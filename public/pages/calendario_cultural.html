@@ -78,8 +78,14 @@
                         <textarea id="evento-descripcion" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="evento-imagen">URL de la imagen:</label>
-                        <input type="text" id="evento-imagen">
+                        <label for="evento-imagen">Imagen del evento:</label>
+                        <input type="file" id="evento-imagen" accept="image/*">
+                        <div id="imagen-preview-container">
+                            <p class="preview-label">Vista previa:</p>
+                            <div id="imagen-preview">
+                                <img id="preview" src="#" alt="Vista previa">
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="evento-lugar">Lugar:</label>
