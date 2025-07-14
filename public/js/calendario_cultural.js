@@ -1,23 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Datos de eventos (podría reemplazarse con una conexión a base de datos)
-    let eventos = JSON.parse(localStorage.getItem('eventosCulturales')) || [
-        {
-            id: 1,
-            titulo: "Festival de Música Tradicional",
-            fecha: new Date(new Date().getFullYear(), new Date().getMonth(), 15),
-            descripcion: "Disfruta de lo mejor de nuestra música tradicional con artistas locales e invitados especiales.",
-            imagen: "../images/eventos/musica-tradicional.jpg",
-            lugar: "Plaza Principal"
-        },
-        {
-            id: 2,
-            titulo: "Exposición de Arte Contemporáneo",
-            fecha: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 5),
-            descripcion: "Exposición de artistas locales emergentes en el centro cultural municipal.",
-            imagen: "../images/eventos/arte-contemporaneo.jpg",
-            lugar: "Centro Cultural"
-        }
-    ];
+
+
+document.addEventListener('DOMContentLoaded', async function() {
+    
+    let eventos = [];
 
     // Elementos del DOM
     const mesActualElement = document.getElementById('mes-actual');
@@ -60,6 +45,22 @@ document.addEventListener('DOMContentLoaded', function() {
         "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     ];
+
+    // Función para cargar eventos desde el backend
+    async function cargarEventos() {
+        try {
+            const response = await fetch('/api/eventos');
+            if (!response.ok) throw new Error('Error al cargar eventos');
+            eventos = await response.json();
+            actualizarCalendario();
+        } catch (error) {
+            console.error('Error:', error);
+            eventos = []; // Fallback a array vacío
+        }
+    }
+
+    await cargarEventos();
+    inicializarCalendario();
 
     function verificarAutenticacion() {
         const authData = localStorage.getItem('auth');
@@ -109,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         generarCalendario(mesSiguiente, añoSiguiente, mesSiguienteElement);
         
         // Guardar en localStorage
-        guardarEventosEnLocalStorage();
+        //guardarEventosEnLocalStorage();
     }
 
     // Generar calendario para un mes específico
@@ -210,47 +211,79 @@ document.addEventListener('DOMContentLoaded', function() {
         eventoSeleccionado = eventosMostrar[0];
         
         document.getElementById('modal-titulo').textContent = eventoSeleccionado.titulo;
-        document.getElementById('modal-fecha').textContent = 
-            `Fecha: ${formatDateForDisplay(eventoSeleccionado.fecha)}`;
+        document.getElementById('modal-fecha').textContent = `Fecha: ${formatDateForDisplay(eventoSeleccionado.fecha)}`;
         document.getElementById('modal-descripcion').textContent = eventoSeleccionado.descripcion;
-        document.getElementById('modal-imagen').src = eventoSeleccionado.imagen;
+        
+        // Mostrar imagen PNG desde BYTEA
+        const imgElement = document.getElementById('modal-imagen');
+        if (eventoSeleccionado.imagen) {
+            if (typeof eventoSeleccionado.imagen === 'object' && eventoSeleccionado.imagen.type === 'Buffer') {
+                // Convertir Buffer a base64 para PNG
+                const base64String = bufferToBase64(eventoSeleccionado.imagen.data);
+                imgElement.src = `data:image/png;base64,${base64String}`;
+                imgElement.style.display = 'block';
+            } else if (typeof eventoSeleccionado.imagen === 'string') {
+                // Si ya es base64
+                imgElement.src = eventoSeleccionado.imagen.startsWith('data:') 
+                    ? eventoSeleccionado.imagen 
+                    : `data:image/png;base64,${eventoSeleccionado.imagen}`;
+                imgElement.style.display = 'block';
+            } else {
+                console.error('Formato de imagen no compatible:', eventoSeleccionado.imagen);
+                imgElement.style.display = 'none';
+            }
+        } else {
+            imgElement.style.display = 'none';
+        }
+        
         document.getElementById('modal-lugar').textContent = `Lugar: ${eventoSeleccionado.lugar}`;
         
-        // Limpiar acciones anteriores si existen
+        // Resto de la función permanece igual
         const accionesAnteriores = document.querySelector('.modal-contenido .acciones-evento');
         if (accionesAnteriores) {
             accionesAnteriores.remove();
         }
         
-        // Agregar botones de edición y eliminación
-        const acciones = document.createElement('div');
-        acciones.className = 'acciones-evento';
-        acciones.style.marginTop = '20px';
-        acciones.style.textAlign = 'right';
-        
-        const btnEditar = document.createElement('button');
-        btnEditar.textContent = 'Editar Evento';
-        btnEditar.className = 'boton-evento';
-        btnEditar.addEventListener('click', function() {
-            modal.style.display = 'none';
-            abrirModalGestion(eventoSeleccionado);
-        });
-        
-        const btnEliminar = document.createElement('button');
-        btnEliminar.textContent = 'Eliminar Evento';
-        btnEliminar.className = 'boton-evento eliminar';
-        btnEliminar.addEventListener('click', function() {
-            if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
-                eliminarEvento(eventoSeleccionado.id);
+        /*
+        if (usuarioAutenticado) {
+            const acciones = document.createElement('div');
+            acciones.className = 'acciones-evento';
+            acciones.style.marginTop = '20px';
+            acciones.style.textAlign = 'right';
+            
+            const btnEditar = document.createElement('button');
+            btnEditar.textContent = 'Editar Evento';
+            btnEditar.className = 'boton-evento';
+            btnEditar.addEventListener('click', function() {
                 modal.style.display = 'none';
-            }
-        });
-        
-        //acciones.appendChild(btnEditar);
-        //acciones.appendChild(btnEliminar);
-        document.querySelector('.modal-contenido').appendChild(acciones);
+                abrirModalGestion(eventoSeleccionado);
+            });
+            
+            const btnEliminar = document.createElement('button');
+            btnEliminar.textContent = 'Eliminar Evento';
+            btnEliminar.className = 'boton-evento eliminar';
+            btnEliminar.addEventListener('click', function() {
+                eliminarEvento(eventoSeleccionado.id);
+            });
+            
+            acciones.appendChild(btnEditar);
+            acciones.appendChild(btnEliminar);
+            document.querySelector('.modal-contenido').appendChild(acciones);
+        }
+        */
         
         modal.style.display = 'block';
+    }
+
+    // Función para convertir Buffer a Base64
+    function bufferToBase64(buffer) {
+        let binary = '';
+        const bytes = new Uint8Array(buffer);
+        const len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
     }
 
     // Funciones para gestión de eventos
@@ -326,11 +359,13 @@ document.addEventListener('DOMContentLoaded', function() {
     async function guardarEvento(e) {
         e.preventDefault();
         
+        // Crear FormData para enviar los datos
+        const formData = new FormData();
         const id = document.getElementById('evento-id').value;
-        const titulo = document.getElementById('evento-titulo').value;
+        const titulo = document.getElementById('evento-titulo').value.trim();
         const fechaStr = document.getElementById('evento-fecha').value;
-        const descripcion = document.getElementById('evento-descripcion').value;
-        const lugar = document.getElementById('evento-lugar').value;
+        const descripcion = document.getElementById('evento-descripcion').value.trim();
+        const lugar = document.getElementById('evento-lugar').value.trim();
         const imagenInput = document.getElementById('evento-imagen');
         
         // Validación básica
@@ -339,46 +374,42 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Crear fecha correctamente
-        const [year, month, day] = fechaStr.split('-');
-        const fecha = new Date(year, month - 1, day);
+        // Agregar datos al FormData
+        formData.append('titulo', titulo);
+        formData.append('fecha', fechaStr);
+        formData.append('descripcion', descripcion);
+        formData.append('lugar', lugar);
         
-        // Manejo de la imagen
-        let imagenBase64 = '';
-        if (eventoEditando && !imagenInput.files[0]) {
+        // Manejar imagen si se subió una nueva
+        if (imagenInput.files[0]) {
+            formData.append('imagen', imagenInput.files[0]);
+        } else if (eventoEditando && eventoEditando.imagen) {
             // Si estamos editando y no se subió nueva imagen, mantener la existente
-            imagenBase64 = eventoEditando.imagen;
-        } else if (imagenInput.files[0]) {
-            // Convertir imagen a Base64
-            const file = imagenInput.files[0];
-            imagenBase64 = await convertToBase64(file);
-        } else {
-            // Imagen por defecto si no se proporciona ninguna
-            imagenBase64 = 'data:image/png;base64,...'; // Tu imagen por defecto en base64
+            formData.append('imagenBase64', eventoEditando.imagen);
         }
         
-        const nuevoEvento = {
-            id: id || generarNuevoId(),
-            titulo,
-            fecha,
-            descripcion,
-            imagen: imagenBase64,
-            lugar
-        };
-        
-        if (eventoEditando) {
-            // Actualizar evento existente
-            const index = eventos.findIndex(e => e.id == eventoEditando.id);
-            if (index !== -1) {
-                eventos[index] = nuevoEvento;
+        try {
+            const url = id ? `/api/eventos/${id}` : '/api/eventos';
+            const method = id ? 'PUT' : 'POST';
+            
+            const response = await fetch(url, {
+                method,
+                body: formData
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al guardar el evento');
             }
-        } else {
-            // Agregar nuevo evento
-            eventos.push(nuevoEvento);
+            
+            await cargarEventos();
+            cerrarModalGestion();
+            alert(id ? 'Evento actualizado correctamente' : 'Evento creado correctamente');
+            
+        } catch (error) {
+            console.error('Error al guardar el evento:', error);
+            alert(`Error: ${error.message}`);
         }
-        
-        actualizarCalendario();
-        cerrarModalGestion();
     }
 
     // Función para convertir archivo a Base64
@@ -392,18 +423,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    function eliminarEvento(id) {
-    if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
-        eventos = eventos.filter(evento => evento.id !== id);
-        guardarEventosEnLocalStorage();
-        actualizarCalendario();
+    async function eliminarEvento(id) {
+        if (!confirm('¿Estás seguro de que deseas eliminar este evento?')) return;
         
-        // Si el modal de eventos está abierto, cerrarlo
-        if (modal.style.display === 'block') {
-            modal.style.display = 'none';
+        try {
+            const response = await fetch(`/api/eventos/${id}`, {
+                method: 'DELETE'
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al eliminar el evento');
+            }
+            
+            await cargarEventos();
+            
+            // Cerrar modales si están abiertos
+            if (modal.style.display === 'block') modal.style.display = 'none';
+            if (modalGestionEvento.style.display === 'block') modalGestionEvento.style.display = 'none';
+            
+        } catch (error) {
+            console.error('Error:', error);
+            alert(`Error al eliminar: ${error.message}`);
         }
     }
-}
 
     function generarNuevoId() {
         return eventos.length > 0 ? Math.max(...eventos.map(e => e.id)) + 1 : 1;
@@ -491,40 +534,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Cargar lista de eventos en el modal
-    function cargarListaEventos() {
-        listaEventos.innerHTML = ''; // Limpiar lista
-        
-        if (eventos.length === 0) {
-            listaEventos.innerHTML = '<p>No hay eventos programados.</p>';
-            return;
-        }
-        
-        // Ordenar eventos por fecha
-        const eventosOrdenados = [...eventos].sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
-        
-        eventosOrdenados.forEach(evento => {
-            const eventoItem = document.createElement('div');
-            eventoItem.className = 'evento-item';
+    async function cargarListaEventos() {
+        try {
+            const response = await fetch('/api/eventos');
+            if (!response.ok) throw new Error('Error al cargar eventos');
+            eventos = await response.json();
             
-            eventoItem.innerHTML = `
-                <div class="evento-info">
-                    <div class="evento-titulo">${evento.titulo}</div>
-                    <div class="evento-fecha">${formatDateForDisplay(evento.fecha)}</div>
-                </div>
-                <button class="btn-eliminar-item" data-id="${evento.id}">Eliminar</button>
-            `;
+            listaEventos.innerHTML = ''; // Limpiar lista
             
-            listaEventos.appendChild(eventoItem);
-        });
-        
-        // Agregar event listeners a los botones de eliminar
-        document.querySelectorAll('.btn-eliminar-item').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = parseInt(this.getAttribute('data-id'));
-                eliminarEvento(id);
-                cargarListaEventos(); // Recargar la lista después de eliminar
+            if (eventos.length === 0) {
+                listaEventos.innerHTML = '<p>No hay eventos programados.</p>';
+                return;
+            }
+            
+            // Ordenar eventos por fecha
+            const eventosOrdenados = [...eventos].sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+            
+            eventosOrdenados.forEach(evento => {
+                const eventoItem = document.createElement('div');
+                eventoItem.className = 'evento-item';
+                
+                eventoItem.innerHTML = `
+                    <div class="evento-info">
+                        <div class="evento-titulo">${evento.titulo}</div>
+                        <div class="evento-fecha">${formatDateForDisplay(evento.fecha)}</div>
+                    </div>
+                    <button class="btn-eliminar-item" data-id="${evento.id}">Eliminar</button>
+                `;
+                
+                listaEventos.appendChild(eventoItem);
             });
-        });
+            
+            // Agregar event listeners a los botones de eliminar
+            document.querySelectorAll('.btn-eliminar-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    eliminarEvento(id);
+                    // No recargamos inmediatamente, esperamos a que la eliminación se complete
+                });
+            });
+        } catch (error) {
+            console.error('Error:', error);
+            listaEventos.innerHTML = '<p>Error al cargar los eventos</p>';
+        }
     }
 
     // Cerrar modal de eliminar eventos
