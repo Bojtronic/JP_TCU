@@ -603,3 +603,63 @@ function cerrarSesion() {
     // Redirigir o actualizar la página según sea necesario
     window.location.reload();
 }
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const carrusel = document.querySelector('.carrusel');
+    const diapositivas = document.querySelectorAll('.diapositiva');
+    const btnAnterior = document.querySelector('.anterior');
+    const btnSiguiente = document.querySelector('.siguiente');
+    const indicadores = document.querySelectorAll('.indicador');
+    
+    let indiceActual = 0;
+    const totalDiapositivas = diapositivas.length;
+    
+    function actualizarCarrusel() {
+        carrusel.style.transform = `translateX(-${indiceActual * 100}%)`;
+        
+        // Actualizar indicadores
+        indicadores.forEach((indicador, index) => {
+            if (index === indiceActual) {
+                indicador.classList.add('activo');
+            } else {
+                indicador.classList.remove('activo');
+            }
+        });
+    }
+    
+    function siguienteDiapositiva() {
+        indiceActual = (indiceActual + 1) % totalDiapositivas;
+        actualizarCarrusel();
+    }
+    
+    function anteriorDiapositiva() {
+        indiceActual = (indiceActual - 1 + totalDiapositivas) % totalDiapositivas;
+        actualizarCarrusel();
+    }
+    
+    // Event listeners
+    btnSiguiente.addEventListener('click', siguienteDiapositiva);
+    btnAnterior.addEventListener('click', anteriorDiapositiva);
+    
+    // Indicadores
+    indicadores.forEach(indicador => {
+        indicador.addEventListener('click', function() {
+            indiceActual = parseInt(this.getAttribute('data-indice'));
+            actualizarCarrusel();
+        });
+    });
+    
+    // Auto-avance (opcional)
+    let intervalo = setInterval(siguienteDiapositiva, 5000);
+    
+    // Pausar al pasar el mouse
+    carrusel.addEventListener('mouseenter', () => clearInterval(intervalo));
+    carrusel.addEventListener('mouseleave', () => {
+        intervalo = setInterval(siguienteDiapositiva, 3000);
+    });
+    
+    // Inicializar
+    actualizarCarrusel();
+});

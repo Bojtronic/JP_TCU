@@ -38,7 +38,26 @@
         <button id="logout-button" onclick="cerrarSesion()" class="auth-btn logout-btn">Cerrar Sesión</button>
     </div>
 
-    <img class="imagen-responsive" src="../images/5/propuesta-web-ade_03.jpg" alt="Calendario cultural">
+    <div class="carrusel-container">
+        <div class="carrusel">
+            <div class="diapositiva">
+                <img src="../images/5/propuesta-web-ade_03.jpg" alt="Evento cultural 1">
+            </div>
+            <div class="diapositiva">
+                <img src="../images/5/propuesta-web-ade_03_2.jpg" alt="Evento cultural 2">
+            </div>
+            <div class="diapositiva">
+                <img src="../images/5/propuesta-web-ade_03_3.jpg" alt="Evento cultural 3">
+            </div>
+        </div>
+        <button class="carrusel-btn anterior">‹</button>
+        <button class="carrusel-btn siguiente">›</button>
+        <div class="indicadores">
+            <span class="indicador" data-indice="0"></span>
+            <span class="indicador" data-indice="1"></span>
+            <span class="indicador" data-indice="2"></span>
+        </div>
+    </div>
 
     <main class="calendario-container">
         <h1>Calendario Cultural</h1>
