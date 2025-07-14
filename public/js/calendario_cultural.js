@@ -246,8 +246,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        acciones.appendChild(btnEditar);
-        acciones.appendChild(btnEliminar);
+        //acciones.appendChild(btnEditar);
+        //acciones.appendChild(btnEliminar);
         document.querySelector('.modal-contenido').appendChild(acciones);
         
         modal.style.display = 'block';

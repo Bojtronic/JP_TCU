@@ -5,6 +5,7 @@ const app = express();
 const path = require('path');
 const loginRoutes = require('./routes/loginRoutes');
 const proyectoRoutes = require('./routes/proyectoRoutes');
+const eventoRoutes = require('./routes/eventoRoutes');
 
 const PORT = process.env.PORT || 4000;
 
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Rutas API
 app.use('/api/login', loginRoutes);
 app.use('/api/proyectos', proyectoRoutes);
+app.use('/api/eventos', eventoRoutes);
 
 // Ruta principal
 app.get('/', (req, res) => {
