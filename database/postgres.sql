@@ -26,5 +26,4 @@ CREATE TABLE eventos (
 
 -- Usuario administrador
 INSERT INTO usuarios (nombre, correo, clave)
-VALUES ('administrador', '
-ade.culturaspalmares@gmail.com', 'adecp');
+VALUES ('administrador', 'ade.culturaspalmares@gmail.com', 'adecp');

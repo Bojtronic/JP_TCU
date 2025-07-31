@@ -2,13 +2,13 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   //user: 'postgres',
-  user: 'jp_tcu_bd_user',   
+  user: 'jp_tcu_db_user',   
   //host: 'localhost',
-  host: 'dpg-d1fc55je5dus73fr5fpg-a',   // .oregon-postgres.render.com/jp_tcu_bd   
+  host: 'dpg-d25s1mqdbo4c73aob5vg-a',   
   //database: 'JP_TCU',
-  database: 'jp_tcu_bd',
+  database: 'jp_tcu_db',
   //password: '12345',
-  password: 'mmZr25WbHBMuDbROwYeWcMREL6Umv38A',
+  password: 'zuQoqXLWPpqQHYIZgkZQ9EM61nve7qpG',
   port: 5432,
 });
 
