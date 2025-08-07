@@ -657,7 +657,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Pausar al pasar el mouse
     carrusel.addEventListener('mouseenter', () => clearInterval(intervalo));
     carrusel.addEventListener('mouseleave', () => {
-        intervalo = setInterval(siguienteDiapositiva, 3000);
+        intervalo = setInterval(siguienteDiapositiva, 2000);
     });
     
     // Inicializar
