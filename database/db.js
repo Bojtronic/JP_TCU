@@ -4,18 +4,17 @@ const pool = new Pool({
   //user: 'postgres',
   user: 'jp_tcu_db_user',   
   //host: 'localhost',
-  host: 'dpg-d25s1mqdbo4c73aob5vg-a',   
+  host: 'dpg-d3b0jkruibrs73f3gnag-a',   
   //database: 'JP_TCU',
-  database: 'jp_tcu_db',
+  database: 'jp_tcu_db_2k2q',
   //password: '12345',
-  password: 'zuQoqXLWPpqQHYIZgkZQ9EM61nve7qpG',
+  password: 'pgN4PHG0RBxH5lRLHHQ7RzMG0JgvVU5r',
   port: 5432,
 });
 
 module.exports = {
   query: (text, params) => pool.query(text, params),
 };
-
 
 
 /*
