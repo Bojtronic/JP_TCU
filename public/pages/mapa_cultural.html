@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/encabezado.css">
     <link rel="stylesheet" href="../css/general.css">
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/calendario_cultural.css">
     <title>Mapa cultural</title>
 </head>
 <body class="orange">
@@ -36,7 +37,50 @@
         <button id="logout-button" class="auth-btn logout-btn">Cerrar Sesión</button>
     </div>
     
-    <img class="imagen-responsive" src="../images/4/propuesta-web-ade_03.gif" alt="Mapa cultural">
+   <div class="carrusel-container">
+        <div class="carrusel">
+            <div class="diapositiva">
+                <img src="../images/carrusel/1.jpeg" alt="Evento cultural">
+            </div>
+            <div class="diapositiva">
+                <img src="../images/carrusel/2.jpeg" alt="Evento cultural">
+            </div>
+            <div class="diapositiva">
+                <img src="../images/carrusel/3.jpeg" alt="Evento cultural">
+            </div>
+            <div class="diapositiva">
+                <img src="../images/carrusel/4.jpeg" alt="Evento cultural">
+            </div>
+            <div class="diapositiva">
+                <img src="../images/carrusel/5.jpg" alt="Evento cultural">
+            </div>
+            <div class="diapositiva">
+                <img src="../images/carrusel/6.jpeg" alt="Evento cultural">
+            </div>
+            <div class="diapositiva">
+                <img src="../images/carrusel/7.jpg" alt="Evento cultural">
+            </div>
+            <div class="diapositiva">
+                <img src="../images/carrusel/8.jpg" alt="Evento cultural">
+            </div>
+            <div class="diapositiva">
+                <img src="../images/carrusel/9.jpg" alt="Evento cultural">
+            </div>
+        </div>
+        <button class="carrusel-btn anterior">‹</button>
+        <button class="carrusel-btn siguiente">›</button>
+        <div class="indicadores">
+            <span class="indicador" data-indice="0"></span>
+            <span class="indicador" data-indice="1"></span>
+            <span class="indicador" data-indice="2"></span>
+            <span class="indicador" data-indice="3"></span>
+            <span class="indicador" data-indice="4"></span>
+            <span class="indicador" data-indice="5"></span>
+            <span class="indicador" data-indice="6"></span>
+            <span class="indicador" data-indice="7"></span>
+            <span class="indicador" data-indice="8"></span>
+        </div>
+    </div>
 
     <img class="imagen-responsive" src="../images/4/propuesta-web-ade_05.gif" alt="Mapa cultural">
 
@@ -61,5 +105,6 @@
     </div>
     
     <script src="../js/auth.js"></script>
+    <script src="../js/calendario_cultural.js"></script>
 </body>
 </html>
